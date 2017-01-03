@@ -1,23 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
-	
+
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
-		<title>Sede</title>
-		<meta name="keywords" content="acquario di PLACEHOLDER, " />
-		<meta name="description" content="pagina dedicata alla sede di PLACEHOLDER" />
+		<title>Login</title>
+		<meta name="keywords" content="acquario PLACEHOLDER, login, registrazione" />
+		<meta name="description" content="pagina per la registrazione e/o il login al sito" />
 		<meta name="author" content="GRUPPO" />
+		<meta name="robots" content="noindex, nofollow" />
 	</head>
-	
-	
 	<body>
-
-		<div id="header">
+	<div id="header">
 
 			<div id="banner">
 				<h1>Acquario</h1>
-				<h2>La magia dell&apos;oceano davanti a te!</h2>
+				<h2>La magia dell'oceano davanti a te!</h2>
 				
 				<div id="description">
 					<span></span>
@@ -43,47 +41,58 @@
 			<div id="path">
 				<span>Ti trovi in: </span>
 				<span>Home</span>
-				<!--<span>sede</span>-->
 			</div><!-- chiudo path-->
 		
 		</div><!-- chiudo header-->
-
+	
 		<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
 		
-			<div id="contenuto">
-				<!--<div id="presentazione">
-					
-					<span>CIao mondo!!</span>
-					
-				</div>-->
-				<div><!--non so come chiamare questo div, contiene tutto quello che ho fatto x ora-->
-					<h1>L&apos;acquario di PLACEHOLDER</h1> <!--nb ho fatto ricominciare da h1 perchè è essenzialmente una sezione diversa (contenuto invece di header)-->
+		<!-- !!!warning-> problemi con i label, esempio:
+		
+		Line 54 (63), Column 19: reference to non-existent ID "username"
+		<label for="username">Username</label>
+		This error can be triggered by:
 
-					<p>L&apos;Acquario di PLACEHOLDER si trova all&apos;interno di edifici, risalente agli anni &apos;30, le cui forme richiamano una flotta navale. 
-					La struttura era stata originariamente concepita come colonia marina per ospitare i figli degli italiani residenti all&apos;estero. 
-					L&apos;attento restauro conservativo, terminato nel giugno 2000, sotto l&apos;egida della Soprintendenza per i Beni Ambientali e Architettonici, 
-					ha riportato al suo antico splendore gli edifici e ha valorizzato tutta l&apos;area, ricca di storia e tradizioni marinare. 
-					L&apos;Acquario si estende su un&apos;area di 110 mila metri quadrati, affacciata sul mare, perfettamente integrata nel tessuto urbano di PLACEHOLDER e dotata di ampi parcheggi. 
-					Nei grandi spazi verdi, fruibili liberamente come parco pubblico (oltre 49.000 metri quadrati), &egrave; possibile usufruire dei seguenti servizi:
-					<ul> 
-						<li>aree relax,</li> 
-						<li>spiaggia adiacente,</li>
-						<li>ristorazione,</li> 
-						<li>bar,</li> 
-						<li>negozi tematici,</li>
-						<li>verde attrezzato,</li> 
-						<li>animazione per bambini,</li> 
-						<li>spettacoli,</li> 
-						<li>mostre,</li> 
-						<li>eventi culturali,congressuali e sportivi.</li>
-					</ul>
-					</p>
-					
-				</div><!--fine-->
+		A non-existent input, select or textarea element
+		A missing id attribute
+		A typographical error in the id attribute
+		Try to check the spelling and case of the id you are referring to. -->
+			<div id="contenuto">
+				<form action="">
+					<fieldset>
+						<label for="username">Username</label>
+						<input type="text" name="username" value="User" />
+						<label for="password">Password</label>
+						<input type="password" name="password" value="Password" />
+						<label for="entra">Entra</label>
+						<input type="submit" name="entra" value="Entra" />
+					</fieldset>
+				</form>
+
+				<form action="">
+					<fieldset>
+						<label for="nome">Nome</label>
+						<input type="text" name="nome" value="" />
+						<label for="cognome">Cognome</label>
+						<input type="text" name="cognome" value="" />
+						<label for="dataDiNascita">Data di nascita</label>
+						<input type="text" name="dataDiNascita" value="xx/xx/xxxx" />
+						<label for="email">Email</label>
+						<input type="text" name="email" value="email" />
+						<label for="telefono">Telefono</label>
+						<input type="text" name="telefono" value="" />
+						<label for="password">Password</label>
+						<input type="password" name="password" value="Password" />
+						<label for="confermaPassword">Conferma password</label>
+						<input type="password" name="confermaPassword" value="Password" />
+						<label for="entra">Entra</label>
+						<input type="submit" name="entra" value="Entra" />
+					</fieldset>
+				</form>
 			</div><!-- chiudo contenuto-->
 
 		</div><!-- chiudo main-->
-
+		
 		<div id="footer">
 
 			<div id="sitemap">
@@ -112,6 +121,5 @@
 			</div><!-- chiudo div validazione -->
 
 		</div><!-- chiudo footer-->
-
 	</body>
 </html>
