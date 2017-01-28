@@ -1,0 +1,298 @@
+/* SEZIONE GENERALE*/
+html, body{
+    margin: 0px; 
+	display: 100%;
+    font-family: Verdana, Helvetica, sans-serif;
+	margin-left:3%;
+	margin-right:3%;
+}
+
+.clearer {
+	clear:both;
+}
+
+.errore {
+	margin-top:1%;
+	background-color:#FFFFEE;
+}
+
+/*SEZIONE HEADER*/
+#header {
+	width: 100%; /* layout fluido*/
+	background-color:#1e90ff;
+	border-radius: 20px 20px 0px 0px;
+	border: groove;
+}
+
+/*logo*/
+/*
+#logo {
+	background-image: url(../images/log.png);
+	background-position: left;
+	background-repeat: no-repeat;
+	padding-left: 0.5em;
+	margin-left: 1em;
+	margin-top: 2em;
+	width: 225px;
+	height: 225px;
+	display: block;
+	float: left;
+}
+*/
+
+/*fine sezione logo*/
+#banner{
+	line-height: 24px;
+	content: inherit;
+	text-transform: helvetica;
+}
+
+#banner {
+	/*background-color:#dddddd;*/
+	height: 8em;
+}
+#banner h1 {
+	padding-top: 0.1em;
+	text-align: center;
+	font-size: 5em;
+	/*color:#00a000;*/
+	color: #000000;	
+}
+#banner h1 span{
+	font-size: 0.5em;
+}
+#banner h2 {
+	padding-top:0em;
+	text-align: center;
+	font-size: 1.5em;
+	/*color:#a00000;*/
+	color: #000000;
+}
+
+/*SEZIONE MENU'*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+/*FINE SEZIONE MENU'*/
+
+/*SEZIONE DOVE SEI*/
+#path {
+	font-size:0.9em;
+	/*background-color:#3CF;*/
+	padding-left: 0.5em;
+}
+
+#path * {
+	/*per tutti i contenuti del div path*/
+	font-size:1em;
+	line-height:1.9em;
+}
+
+#path .separatore_path {
+	/* questo span contiene &gt;, separa le varie sezioni del path*/
+}
+
+#path a {
+	text-decoration:none;
+	color:#000;
+	border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #8e3000;
+    color: #8e3000;
+}
+#path a:hover {
+	text-decoration:underline;
+	color:#810808;
+}
+/*FINE SEZIONE HEADER*/
+
+/*INIZIO SEZIONE CONTENUTO PRINCIPALE*/
+#main {
+	background-position: center;
+	background-image: url(../imageBackground/background.jpg);
+	/*background-repeat: no-repeat;*/
+	background-attachment: fixed; 
+	width: 100%;
+	height: 40em;
+	display: block;
+	border-left: groove;
+	border-right: groove;
+}
+
+/*INIZIO SEZIONE CONTENUTO*/
+
+/*INIZIO SEZIONE "contenitore_sezioni" (CON SEZIONI...)*/
+#contenitore_sezioni > h3, h4{
+	width: 100%;
+	text-align: center;
+}
+
+
+#contenuto p{
+	padding: 0.4em;
+}
+#contenitore_sezioni {
+	float:left;
+	width:70%;
+	display:block;
+}
+#presentazione{
+	text-align: center;
+}
+#contenitore_sezioni .sezione{
+	text-align: justify;
+}
+
+/*link per tornare in alto*/
+#torna_su {
+	display:block;
+	position:fixed;
+	right:15.5%;
+	bottom:6.0em;
+	/*sezione testo*/
+	text-transform:uppercase;
+}
+#torna_su a{
+	text-decoration: none;
+	/*testo*/
+	color: #000;
+}
+#linkservizi{
+	text-align: center;
+}
+#linkservizi a{
+	text-decoration:none;
+	color:#000;
+	text-transform:uppercase;
+	font-size:1.2em;
+	line-height:2.4em;
+}
+
+#mappaSito {
+	font-size: 1.2em;
+}
+#mappaSito  ul ul{
+	margin-left: 2em;
+	
+}
+#mappaSito a{
+	text-decoration: none;
+}
+/*FINE SEZIONE "contenitore_sezioni"*/
+
+/*INIZIO "SEZIONE"*/
+.sezione {
+	margin-right:5em;
+	margin-left:5em;
+	margin-bottom:1em;
+}
+.sezione h3 {
+	width:100%;
+	text-align:center;
+}
+.sezione p {
+}
+/*FINE "SEZIONE"*/
+
+/*LINK*/
+/* link da visitare */
+/*a:active{ 
+	color: #000; 
+} 
+/* link visitato */
+/*a:visited{ 
+	color: #AA00AA; 
+} 
+/* link al passaggio del mouse */
+/*a:hover{ 
+	color: #000; 
+}
+
+/*FINE SEZIONE LINK*/
+
+/*FINE SEZIONE CONTENUTO*/
+
+/*FINE SEZIONE CONTENUTO PRINCIPALE*/
+
+/*INIZIO SEZIONE FOOTER*/
+#footer {
+	clear: both;
+	width: 100%;
+	position: relative;
+	background-color:#1E90ff;
+	border-radius: 0px 0px 20px 20px;
+	border: groove;
+	/*testo*/
+	color: #FFF;
+}
+
+#footer p{
+	font-size: 0.8em;
+}
+
+#sitemap {
+	position:absolute;
+	bottom:0.5em;
+	right:1em;
+}
+#sitemap a{
+	text-decoration: none;
+	font-size: 0.8em;
+	/*testo*/
+	color: #FFF;
+}
+#gruppo {
+	margin:0 auto;
+	width:20em;
+}
+#gruppo p {
+	text-align:center;
+}
+#dati_aziendali {
+	margin:0 auto;
+	width:20em;
+}
+#dati_aziendali p {
+	text-align:center;
+}
+#validazione {
+	width: 11em;
+	margin:0 auto;
+}
+#validazione .css_valido {
+	float: left;
+}
+#validazione .html_valido {
+	float:left;
+}
+/*FINE SEZIONE FOOTER*/
