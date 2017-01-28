@@ -1,0 +1,115 @@
+<!--la sezione deve contenere
+
+i miei ordini:
+tabella con
+codice (id)
+stato
+data inserimento
+prezzo
+dettagli
+-->
+
+	<table summary="In questa tabella vengono elencati gli ordini da lei eseguiti">
+		<caption>i miei ordini</caption>
+		<thead>
+			<tr>
+				<th scope="col">codice</th>
+				<th scope="col">stato</th>
+				<th scope="col">data inserimento</th>
+				<th scope="col">prezzo</th>
+				<th scope="col">dettagli</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th scope="col">codice</th>
+				<th scope="col">stato</th>
+				<th scope="col">data inserimento</th>
+				<th scope="col">prezzo</th>
+				<th scope="col">dettagli</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th scope="row">(id)</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+<!--
+&
+
+riepilogo ordine:
+tabella con
+
+n interi       sconti      prezzo
+n ridotti      idem        idem
+						   prezzo totale
+					   
+-->
+
+	<table summary="In questa tabella vengono dati i dettagli dell'ordine (id)">
+		<caption>dettagli</caption>
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">Riassunto ordine - cliente </th>
+			</tr>
+			<tr>
+				<td colspan="6">acquario di PLACEHOLDER - tipo biglietto - dettaglio biglietto del xx/xx/xxxx</td>
+			</tr>
+			<tr>
+				<th>N interi</th>
+				<th>N ridotti</th>
+				<th>sconti</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th scope="col">codice</th>
+				<th scope="col">stato</th>
+				<th scope="col">data inserimento</th>
+				<th scope="col">prezzo</th>
+				<th scope="col">dettagli</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th scope="row">(id)</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+&						   
+						   
+pagina per visualizzare e modificare i dati provenitenti dalla registrazione
+
+				<form action="">
+					<fieldset>
+						<label for="nome">Nome</label>
+						<input type="text" name="nome" id="nome" value="" />
+						<label for="cognome">Cognome</label>
+						<input type="text" name="cognome" id="cognome" value="" />
+						<label for="dataDiNascita">Data di nascita</label>
+						<input type="text" name="dataDiNascita" id="dataDiNascita" value="xx/xx/xxxx" />
+						<label for="email">Email</label>
+						<input type="text" name="email" id="email" value="email" />
+						<label for="telefono">Telefono</label>
+						<input type="text" name="telefono" id="telefono" value="" />
+						<label for="passwordR">Password</label>
+						<input type="password" name="password" id="passwordR" value="Password" />
+						<label for="confermaPassword">Conferma password</label>
+						<input type="password" name="confermaPassword" id="confermaPassword" value="Password" />
+						<label for="entraR">Entra</label>
+						<input type="submit" name="entra" id="entraR" value="Entra" />
+					</fieldset>
+				</form>

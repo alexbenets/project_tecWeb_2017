@@ -5,8 +5,8 @@
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
 		<title></title>
-		<meta name="keywords" content="biglietti, singoli, gruppi, scolaresche, acquario di PLACEHOLDER" />
-		<meta name="description" content="pagina relativa ai prezzi dei bilgietti per l'acquario di PLACEHOLDER" />
+		<meta name="keywords" content=" sezioni dell'acquario di PLACEHOLDER, acquario di PLACEHOLDER" />
+		<meta name="description" content="pagina sulla sezione SEZIONEPL dell'acquario" />
 		<meta name="author" content="GRUPPO" />
 	</head>
 	<body>
@@ -40,68 +40,22 @@
 			<div id="path">
 				<span>Ti trovi in: </span>
 				<span>Home</span>
+				<span>Esposizioni</span>
 			</div><!-- chiudo path-->
 		
 		</div><!-- chiudo header-->
 				<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
 		
 			<div id="contenuto">
-				<div class="biglietto"> <!--!!! ha senso?-->
-					<h1>TARIFFE INDIVIDUALI</h1>
+				<h1>Sezioni</h1>
+				<div>
+				<!--testo presentazione-->
+				<ul><!--elenco delle pagine delle sezioni-->
+					<li><a htref=""></a></li>
+				</ul>
+				</div>
+				</div><!-- chiudo contenuto-->
 
-					<dl> 
-						<dt>INTERO</dt>	
-							<dd>euro 20,00</dd>
-						<dt>RIDOTTO (da 100cm a 140 di altezza)</dt>
-							<dd>euro 16,00</dd>
-						<dt>SENIOR OVER 65</dt>
-							<dd>euro 16,00</dd>
-						<dt>INVALIDO</dt>
-							<dd>euro 16,00</dd>
-						<dt>ACCOMPAGNATORE DISABILE</dt>
-							<dd>euro 16,00</dd>
-						<dt>BIMBI fino ad 1 metro</dt>  
-							<dd>Gratis</dd>
-						<dt>DISABILE non autosufficiente</dt> 
-							<dd>Gratis</dd>
-					</dl>
-					<a href="">compra biglietto</a>
-				</div>
-				<div class="biglietto">
-					<h1>TARIFFE GRUPPI</h1>
- 
-					<dl>
-						<dt>GRUPPI MISTI</dt>	
-							<dd>euro 15,00</dd>
-						<dt>GRUPPI OVER 65</dt>
-							<dd>euro 12,00</dd>
-						<dt>GRUPPI SPORTIVI RAGAZZI (fino a 16 anni)</dt>  
-							<dd>euro 10,00</dd>
-						<dt>GRUPPI PARROCCHIALI RAGAZZI (fino a 16 anni)</dt>  
-							<dd>euro 10,00</dd>
-						<dt>CENTRI ESTIVI</dt>
-							<dd>euro 10,00</dd>
-					</dl>
-					<a href="" >compra bilglietti</a>
-				</div>
-				<div class="biglietto">
-					<h1>SCOLARESCHE</h1>
-					<dl>
-						<dt>STUDENTI</dt>
-							<dd>euro 10,00</dd>
-						<dt>ACCOMPAGNATORI NON DOCENTI</dt>
-							<dd>euro 15,00</dd>
-						<dt>DOCENTI</dt>
-							<dd>gratis</dd>
-						<dt>BAMBINI SOTTO IL METRO</dt>
-							<dd>gratis</dd>
-						<dt>DIVERSAMENTE ABILI</dt>
-							<dd>gratis</dd>
-					</dl>
-					<a href="" >compra bilglietti</a>
-				</div>
-			</div><!-- chiudo contenuto-->
-			
 		</div><!-- chiudo main-->
 				<div id="footer">
 
