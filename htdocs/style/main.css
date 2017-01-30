@@ -1,10 +1,9 @@
 /* SEZIONE GENERALE*/
 html, body{
     margin: 0px; 
-	display: 100%;
     font-family: Verdana, Helvetica, sans-serif;
-	margin-left:3%;
-	margin-right:3%;
+	margin-left:2%;
+	margin-right:2%;
 }
 
 .clearer {
@@ -44,7 +43,6 @@ html, body{
 #banner{
 	line-height: 24px;
 	content: inherit;
-	text-transform: helvetica;
 }
 
 #banner {
@@ -71,7 +69,7 @@ html, body{
 
 /*SEZIONE MENU'*/
 
-ul {
+#menu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -79,16 +77,16 @@ ul {
     background-color: #333;
 }
 
-li {
+#menu li {
     float: left;
     border-right:1px solid #bbb;
 }
 
-li:last-child {
+#menu li:last-child {
     border-right: none;
 }
 
-li a {
+#menu li a {
     display: block;
     color: white;
     text-align: center;
@@ -96,7 +94,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
+#menu li .a:hover:not(.active) {
     background-color: #111;
 }
 
@@ -152,15 +150,50 @@ li a:hover:not(.active) {
 /*INIZIO SEZIONE CONTENUTO*/
 
 /*INIZIO SEZIONE "contenitore_sezioni" (CON SEZIONI...)*/
-#contenitore_sezioni > h3, h4{
-	width: 100%;
-	text-align: center;
-}
+#contenuto{
+	margin: 0 auto;
 
+}
 
 #contenuto p{
 	padding: 0.4em;
 }
+
+#box{
+	border-radius: 20px 20px 20px 20px;
+	margin-top: 0px;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 1em;
+	width: 60%;
+	height: 60%;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-top: 1%;
+    margin-left: -30%;
+
+    overflow: auto;
+
+    /* IE10 */
+	background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
+ 
+	/* Mozilla Firefox */
+	background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
+	 
+	/* Opera */
+	background-image: -o-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
+	 
+	/* Webkit (Safari/Chrome 10) */
+	background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0, #FFFFFF), color-stop(1, #4dd2ff));
+	 
+	/* Webkit (Chrome 11+) */
+	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
+	 
+	/* Regola standard */
+	background-image: linear-gradient(to top left, #FFFFFF 0%, #4dd2ff 100%);
+}
+
 #contenitore_sezioni {
 	float:left;
 	width:70%;
