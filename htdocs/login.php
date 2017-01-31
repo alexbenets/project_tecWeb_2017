@@ -163,6 +163,7 @@
 		<title>Login</title>
 		<meta name="keywords" content="login, registrazione, acquario PLACEHOLDER" />
 		<meta name="description" content="pagina per la registrazione e/o il login al sito" />
+		<meta name="language" content="italian it" />
 		<meta name="author" content="GRUPPO" />
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
@@ -181,16 +182,36 @@
 			<div id="menu">
 				<ul>
  					<li>
- 						<a href="#home">Home</a>
+ 						<a href="index.html">Home</a>
  					</li>
   					<li>
-  						<a href="#news">News</a>
+  						<a href="#sale">Sale</a>
   					</li>
   					<li>
-  						<a href="#contact">Contact</a>
+  						<a href="#sede">Sede</a>
+  					</li>
+  					<li>
+  						<a href="#storia">Storia</a>
+  					</li>
+  					<li>
+  						<a href="#educazione">Educazione all'ambiente</a>
+  					</li>
+  					<li>
+  						<a href="#biglietti">Biglietti</a>
+  					</li>
+  					<li>
+  						<a href="#chi siamo">Chi siamo</a>
+  					</li>
+  					<li>
+  						<a href="#orario">Orario</a>
+  					</li>
+  					<li>
+  						<a href="#contatti">Contatti</a>
+  					</li>
+  					<li>
+  						<a href="#pagina utente">Pagina utente</a>
   					</li>
 				</ul>
-		
 			</div><!-- chiudo menu -->
 			<div class="clearer"></div>
 
