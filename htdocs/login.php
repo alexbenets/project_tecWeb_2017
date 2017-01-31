@@ -188,13 +188,13 @@
   						<a href="#sale">Sale</a>
   					</li>
   					<li>
-  						<a href="#sede">Sede</a>
+  						<a href="sede.html">Sede</a>
   					</li>
   					<li>
-  						<a href="#storia">Storia</a>
+  						<a href="storia.html">Storia</a>
   					</li>
   					<li>
-  						<a href="#educazione">Educazione all'ambiente</a>
+  						<a href="ambiente.html">Educazione all'ambiente</a>
   					</li>
   					<li>
   						<a href="#biglietti">Biglietti</a>
@@ -203,10 +203,10 @@
   						<a href="#chi siamo">Chi siamo</a>
   					</li>
   					<li>
-  						<a href="#orario">Orario</a>
+  						<a href="orario.html">Orario</a>
   					</li>
   					<li>
-  						<a href="#contatti">Contatti</a>
+  						<a href="contatti.html">Contatti</a>
   					</li>
   					<li>
   						<a href="#pagina utente">Pagina utente</a>
