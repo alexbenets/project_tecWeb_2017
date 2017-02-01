@@ -185,7 +185,7 @@
  						<a href="index.html">Home</a>
  					</li>
   					<li>
-  						<a href="#sale">Sale</a>
+  						<a href="sezioni.html">Sale</a>
   					</li>
   					<li>
   						<a href="sede.html">Sede</a>

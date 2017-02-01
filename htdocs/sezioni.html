@@ -1,38 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
-	
+
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
-		<title>Home</title>
-
-		<meta name="title" content="Acquario di PLACEHOLDER" />
-		<meta name="description" content="Home page del sito di Acquario di PLACEHOLDER" />
-		<meta name="keywords" content="Acquario, pesci, acqua, barriera corallina, oceano" />
+		<title>Sezioni</title>
+		<meta name="keywords" content=" sezioni dell'acquario di PLACEHOLDER, acquario di PLACEHOLDER" />
+		<meta name="description" content="pagina che elenca le sezioni presenti nell'acquario" />
 		<meta name="language" content="italian it" />
-		<meta name="author" content="Gruppo MarAlFraMar" />
-
+		<meta name="author" content="GRUPPO" />
 	</head>
-	
 	<body>
-
-		<div id="header">
-			<div id="logo">
-
-			</div>
+	<div id="header">
 
 			<div id="banner">
 				<h1>Acquario</h1>
 				<h2>La magia dell'oceano davanti a te!</h2>
+				
+				<div id="description">
+					<span></span>
+				</div>
 			</div><!-- chiudo banner-->
 			
 			<div id="menu">
 				<ul>
  					<li>
- 						<a class="active" href="#index.html">Home</a>
+ 						<a href="index.html">Home</a>
  					</li>
   					<li>
-  						<a href="sezioni.html">Sale</a>
+  						<a class="active" href="sezioni.html.html">Sale</a>
   					</li>
   					<li>
   						<a href="sede.html">Sede</a>
@@ -60,28 +56,35 @@
   					</li>
 				</ul>
 			</div><!-- chiudo menu -->
-		
 			<div class="clearer"></div>
 
 			<div id="path">
 				<span>Ti trovi in: </span>
 				<span>Home</span>
+				<span>Esposizioni</span>
 			</div><!-- chiudo path-->
 		
 		</div><!-- chiudo header-->
-
-		<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
+				<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
 		
 			<div id="contenuto">
-				<div id="imageIndex">
-					
-					
+			<div id="box">
+				<h1>Sezioni</h1>
+				<div>
+				<!--testo presentazione-->
+				<ul><!--elenco delle pagine delle sezioni-->
+					<li><a href="barriera_corallina.html">La barriera corallina</a></li>
+					<li><a href="mare_aperto.html">Il mare aperto</a></li>
+					<li><a href="acque_glaciali.html">Le acque glaciali</a></li>
+					<li><a href="antichi.html">Gli antichi</a></li>
+					<li><a href="abissi.html">Gli abissi</a></li>
+				</ul>
 				</div>
-			</div><!-- chiudo contenuto-->
-			<div class="clearer"></div> <!-- chiudo i float -->
-		</div><!-- chiudo main-->
+			</div>
+				</div><!-- chiudo contenuto-->
 
-		<div id="footer">
+		</div><!-- chiudo main-->
+				<div id="footer">
 
 			<div id="sitemap">
 				<a href="siteMap.html">Mappa del sito</a>
@@ -109,6 +112,5 @@
 			</div><!-- chiudo div validazione -->
 
 		</div><!-- chiudo footer-->
-
 	</body>
 </html>
