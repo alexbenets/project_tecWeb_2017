@@ -34,6 +34,8 @@
 	$trovato_errori = 0;
 	$utente_gia_registrato = 0;
 	
+	$messaggio="";
+	
 	if (isset($_POST['loginF'])) {
 		/*
 			eseguo il login.
@@ -44,9 +46,14 @@
 			$logged= (login(trim($nome), trim($password)));
 			if ($logged==1) {
 				$_SESSION['login'] = $nome;
-				header('Location: index.html');
+				$page=$_SESSION['page'];
+				if ($page==""){
+					$page="index.html";
+				}
+				header('Location: '.$page);
 			}else{
 				$trovato_errori = 1;
+				$messaggio="Errore nel login!";
 			}
 		}else {
 			$trovato_errori = 1;
@@ -148,6 +155,18 @@
 			}
 			if ($trovato_errori==0){
 				$utente_gia_registrato=registraUtente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
+				
+				if ($utente_gia_registrato == 2 ){
+					$logged= (login(trim($nome), trim($password)));
+					if ($logged==1) {
+						$_SESSION['login'] = $nome;
+						header('Location: index.html');
+					}else{
+						$trovato_errori = 1;
+					}
+				}else{
+					$messaggio="Utente gi&agrave; registrato!";
+				}
 			}
 		}
 	}
@@ -286,6 +305,9 @@
 					</fieldset>
 				</form>
 				<?php
+				}
+				if ($messaggio!=""){
+					print "<h2>$messaggio</h2>";
 				}
 				?>
 			</div><!-- chiudo contenuto-->

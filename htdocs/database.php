@@ -62,7 +62,6 @@
 		
 		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
 		
-		print "1";
 		
 		$trovato = 0;
 		
@@ -83,7 +82,6 @@
     		mysqli_stmt_close($stmt);
 		}
 		if ($trovato==1 ){
-			print ".";
 			return 1;
 		}
 		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Utente_Registrato (nome, cognome, codice_fiscale, data_nascita, email, password) values (?, ?, ?, ?, ?, ?)')){
@@ -97,4 +95,61 @@
 		
 		return 2;
 	} 
+	
+	function prenota($data, $posti, $tipo_prenotazione, $id_utente){
+		global $host_db;
+		global $nome_utente_db;
+		global $password_utente_db;
+		global $nome_db;
+		
+		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
+		
+		$trovato = 1;
+		
+		if (mysqli_connect_errno()) {
+    		printf("Connect failed: %s\n", mysqli_connect_error());
+			return -1;
+		}
+		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Prenotazione (data, numero_posti_disponibili, ID_Sede, ID_Tipologia_prenotazione, ID_Utente_registrato) values (?, ?, ?, ?, ?)')){
+			mysqli_stmt_bind_param($stmt, "siiii", $data, $posti, $trovato, $tipo_prenotazione, $id_utente);
+    		mysqli_stmt_execute($stmt);
+  			
+    		mysqli_stmt_close($stmt);
+		}
+		mysqli_close($oggetto_db);
+		
+		return 2;
+	}
+	function leggi_tipologie_di_prenotazione(){
+		global $host_db;
+		global $nome_utente_db;
+		global $password_utente_db;
+		global $nome_db;
+		
+		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
+		
+		$risultato=array();
+		
+		$trovato = 1;
+		
+		if (mysqli_connect_errno()) {
+    		printf("Connect failed: %s\n", mysqli_connect_error());
+			return -1;
+		}
+		$query = "SELECT * FROM Tipologia_Prenotazione order by note_varie desc";
+		
+		if ($result = mysqli_query($oggetto_db, $query)) {
+ 			/* fetch associative array */
+			while ($row = mysqli_fetch_assoc($result)) {
+		        array_push($risultato, $row);
+		    }
+
+		    /* free result set */
+		    mysqli_free_result($result);
+		}
+
+		mysqli_close($oggetto_db);
+		
+		return $risultato;
+	}
 ?>
