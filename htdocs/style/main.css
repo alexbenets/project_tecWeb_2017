@@ -1,75 +1,70 @@
-/* SEZIONE GENERALE*/
-html, body{
-    margin: 0px; 
+/*SEZIONE GENERALE*/
+html, body{ 
+	margin: 0px; 
+	padding: 0px;
     font-family: Verdana, Helvetica, sans-serif;
-	margin-left:2%;
-	margin-right:2%;
+    font-size:0.9em;
 }
 
-.clearer {
-	clear:both;
+h1,h2,h3,h4,h5,h6 {
+    font-variant: small-caps;
+}
+/*FINE SEZIONE GENERALE*/
+
+/*HEADER*/
+#header{
+    background-color:#1E90ff;
+    color:#ffffff;
+    padding-bottom:1em;
+    padding-top:0.1em;
+    border-radius: 20px 20px 0px 0px;
 }
 
-.errore {
-	margin-top:1%;
-	background-color:#FFFFEE;
-}
-
-/*SEZIONE HEADER*/
-#header {
-	width: 100%; /* layout fluido*/
-	background-color:#1e90ff;
-	border-radius: 20px 20px 0px 0px;
-	border: groove;
-}
-
-/*logo*/
-/*
-#logo {
-	background-image: url(../images/log.png);
-	background-position: left;
-	background-repeat: no-repeat;
-	padding-left: 0.5em;
-	margin-left: 1em;
-	margin-top: 2em;
-	width: 225px;
-	height: 225px;
-	display: block;
-	float: left;
-}
-*/
-
-/*fine sezione logo*/
 #banner{
 	line-height: 24px;
 	content: inherit;
 }
 
 #banner {
-	/*background-color:#dddddd;*/
 	height: 8em;
 }
+
 #banner h1 {
 	padding-top: 0.1em;
 	text-align: center;
 	font-size: 5em;
-	/*color:#00a000;*/
 	color: #000000;	
 }
+
 #banner h1 span{
 	font-size: 0.5em;
 }
+
 #banner h2 {
 	padding-top:0em;
 	text-align: center;
-	font-size: 1.5em;
-	/*color:#a00000;*/
+	font-size: 2em;
 	color: #000000;
 }
+/*FINE HEADER*/
 
-/*SEZIONE MENU'*/
+/*PATH*/
+#path{
+    background-color:#2b0db1;
+    color:#88BBEE;
+    padding:0.2em;
+    padding-left:1.0em;
+    font-size: 1.2em;
+}
+/*FINE PATH*/
 
-#menu ul {
+/*NAV*/
+#nav{
+    width:17%;
+    float:left;
+}
+
+#nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -77,8 +72,7 @@ html, body{
     background-color: #333;
 }
 
-#menu li {
-    float: left;
+#nav li {
     border-right:1px solid #bbb;
 }
 
@@ -86,7 +80,7 @@ html, body{
     border-right: none;
 }
 
-#menu li a {
+#nav li a {
     display: block;
     color: white;
     text-align: center;
@@ -94,238 +88,68 @@ html, body{
     text-decoration: none;
 }
 
-#menu li .a:hover:not(.active) {
+#nav li .a:hover:not(.active) {
     background-color: #111;
 }
 
 .active {
     background-color: #4CAF50;
 }
-/*FINE SEZIONE MENU'*/
+/*FINE NAV*/
 
-/*SEZIONE DOVE SEI*/
-#path {
-	font-size:0.9em;
-	/*background-color:#3CF;*/
-	padding-left: 0.5em;
+/*MAIN*/
+#main{
+    background-color:#1E90ff;
+    margin:0px;
+    margin-left:17%;
 }
 
-#path * {
-	/*per tutti i contenuti del div path*/
-	font-size:1em;
-	line-height:1.9em;
-}
-
-#path .separatore_path {
-	/* questo span contiene &gt;, separa le varie sezioni del path*/
-}
-
-#path a {
-	text-decoration:none;
-	color:#000;
-	border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #8e3000;
-    color: #8e3000;
-}
-#path a:hover {
-	text-decoration:underline;
-	color:#810808;
-}
-/*FINE SEZIONE HEADER*/
-
-/*INIZIO SEZIONE CONTENUTO PRINCIPALE*/
-#main {
-	background-position: center;
-	background-image: url(../imageBackground/background.jpg);
-	/*background-repeat: no-repeat;*/
-	background-attachment: fixed; 
+#imgHomePage{
 	width: 100%;
-	height: 40em;
-	display: block;
-	border-left: groove;
-	border-right: groove;
+	height: 440px;
+	margin: 0px;
+}
+/*FINE MAIN*/
+
+/*FOOTER*/
+#footer{
+    clear:both;
+    font-size:1em;
+    background-color:#1E90ff;
+    color:#000000;
+    padding:0.5em;
+    border-radius: 0px 0px 20px 20px;
 }
 
-/*INIZIO SEZIONE CONTENUTO*/
-
-/*INIZIO SEZIONE "contenitore_sezioni" (CON SEZIONI...)*/
-#contenuto{
-	margin: 0 auto;
-
-}
-
-#contenuto p{
-	padding: 0.4em;
-}
-
-#box{
-	border-radius: 20px 20px 20px 20px;
-	margin-top: 0px;
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-	padding-left: 1em;
-	width: 60%;
-	height: 60%;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    margin-top: 1%;
-    margin-left: -30%;
-
-    overflow: auto;
-
-    /* IE10 */
-	background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
- 
-	/* Mozilla Firefox */
-	background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
-	 
-	/* Opera */
-	background-image: -o-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
-	 
-	/* Webkit (Safari/Chrome 10) */
-	background-image: -webkit-gradient(linear, top left, bottom right, color-stop(0, #FFFFFF), color-stop(1, #4dd2ff));
-	 
-	/* Webkit (Chrome 11+) */
-	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #4dd2ff 100%);
-	 
-	/* Regola standard */
-	background-image: linear-gradient(to top left, #FFFFFF 0%, #4dd2ff 100%);
-}
-
-#contenitore_sezioni {
-	float:left;
-	width:70%;
-	display:block;
-}
-#presentazione{
-	text-align: center;
-}
-#contenitore_sezioni .sezione{
-	text-align: justify;
-}
-
-/*link per tornare in alto*/
-#torna_su {
-	display:block;
-	position:fixed;
-	right:15.5%;
-	bottom:6.0em;
-	/*sezione testo*/
-	text-transform:uppercase;
-}
-#torna_su a{
-	text-decoration: none;
-	/*testo*/
-	color: #000;
-}
-#linkservizi{
-	text-align: center;
-}
-#linkservizi a{
-	text-decoration:none;
-	color:#000;
-	text-transform:uppercase;
-	font-size:1.2em;
-	line-height:2.4em;
-}
-
-#mappaSito {
-	font-size: 1.2em;
-}
-#mappaSito  ul ul{
-	margin-left: 2em;
-	
-}
-#mappaSito a{
-	text-decoration: none;
-}
-/*FINE SEZIONE "contenitore_sezioni"*/
-
-/*INIZIO "SEZIONE"*/
-.sezione {
-	margin-right:5em;
-	margin-left:5em;
-	margin-bottom:1em;
-}
-.sezione h3 {
-	width:100%;
-	text-align:center;
-}
-.sezione p {
-}
-/*FINE "SEZIONE"*/
-
-/*LINK*/
-/* link da visitare */
-/*a:active{ 
-	color: #000; 
-} 
-/* link visitato */
-/*a:visited{ 
-	color: #AA00AA; 
-} 
-/* link al passaggio del mouse */
-/*a:hover{ 
-	color: #000; 
-}
-
-/*FINE SEZIONE LINK*/
-
-/*FINE SEZIONE CONTENUTO*/
-
-/*FINE SEZIONE CONTENUTO PRINCIPALE*/
-
-/*INIZIO SEZIONE FOOTER*/
-#footer {
-	clear: both;
-	width: 100%;
-	position: relative;
-	background-color:#1E90ff;
-	border-radius: 0px 0px 20px 20px;
-	border: groove;
-	/*testo*/
-	color: #FFF;
-}
-
-#footer p{
-	font-size: 0.8em;
-}
-
-#sitemap {
-	position:absolute;
-	bottom:0.5em;
-	right:1em;
-}
-#sitemap a{
-	text-decoration: none;
-	font-size: 0.8em;
-	/*testo*/
-	color: #FFF;
-}
 #gruppo {
 	margin:0 auto;
 	width:20em;
 }
+
 #gruppo p {
 	text-align:center;
 }
+
 #dati_aziendali {
 	margin:0 auto;
 	width:20em;
 }
+
 #dati_aziendali p {
 	text-align:center;
 }
+
 #validazione {
-	width: 11em;
-	margin:0 auto;
+	margin: 0 auto;
+	width: 6.5em;
 }
-#validazione .css_valido {
-	float: left;
+
+#sitemap {
+	display: block;
 }
-#validazione .html_valido {
-	float:left;
+
+#sitemap a{
+	text-decoration: none;
+	font-size: 0.8em;
+	color: #000000;
 }
-/*FINE SEZIONE FOOTER*/
