@@ -7,9 +7,71 @@
 	/* controllo se ho effettuato l'accesso */
 	$biglietti = leggi_tipologie_di_prenotazione();
 	$link_prenotazione='<a href="login.php">Accedi per prenotare</a>';
-	if ($_SESSION['login']==1){
+	$step=0;
+	if(isset($_GET['step'])){
+		$step=$_GET['step'];
+	}
+	if(isset($_POST['step'])){
+		$step=$_POST['step'];
+	}
+	if (isset($_SESSION['login'])){
+		if ($_SESSION['login']!=""){
+			$link_prenotazione='<a href="prenota.php?step=1">Prenota un biglietto!</a>';
+		}
 	}else{
+		$step=0;
+	}
 	
+	$errori = "";
+	
+	$data="";
+	$selezione_tipo_biglietto = -1;
+	$quantita_biglietti = 1;
+	/* se ho inviato il modulo */
+	if(isset($_POST['invia'])){
+		if (isset($_POST['tipo_biglietto'])){
+			$selezione_tipo_biglietto = $_POST['tipo_biglietto'];
+		}
+		if (isset($_POST['data'])){
+			$data = $_POST['data'];
+		}
+		if (isset($_POST['numero_biglietti'])){
+			$quantita_biglietti = $_POST['numero_biglietti'];
+		}else{
+			$quantita_biglietti = -1;
+		}
+		if ($selezione_tipo_biglietto == -1){
+			$errori = $errori."<p>Attenzione: non &egrave; stato selezionato un biglietto valido.</p>";
+			$step=1;
+		}
+		if ($quantita_biglietti >= 50 ){
+			$errori = $errori."<p>Attenzione: non &egrave; consentito acquistare pi&ugrave; di 50 biglietti per prenotazione.</p>";
+			$step=1;
+		}
+		if ($quantita_biglietti < 1 ){
+			$errori = $errori."<p>Attenzione: non hai specificato la quantit&agrave; di biglietti richiesti.</p>";
+			$step=1;
+		}
+		if (controlla_data($data)==0 ){
+			$errori = $errori."<p>Attenzione: non hai inserito una data corretta.</p>";
+			$step=1;
+		}else {
+			
+			$date = new DateTime(converti_data($data));
+			$now = new DateTime();
+			if ($date<$now){
+				$errori = $errori."<p>Attenzione: la data dev'essere nel futuro.</p>";
+				$step=1;
+			}
+		}
+	}
+	/* ho superato indenne la fase di verifica, procedo con la prenotazione.*/
+	if ($step==2){
+		$res=prenota($data, $quantita_biglietti, $selezione_tipo_biglietto, $_SESSION['userID']);
+		if ($res!=2){
+			$errori = $errori ."<p>Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.</p>";
+		}
+		
 	}
 ?>
 
@@ -87,42 +149,123 @@
 			<div id="box">
 				<?php
 					$titolo="";
-					foreach ($biglietti as &$riga ){
-						/* se cambio il titolo*/
-						if ($riga['note_varie']!=$titolo){
+					if ($step==0){
+						foreach ($biglietti as &$riga ){
+							/* se cambio il titolo*/
+							if ($riga['note_varie']!=$titolo){			
+								if ($titolo!=""){
+								?>
+						</dl>
+						<?php
+							print $link_prenotazione;
+						?>
+					</div>
+								<?php
+								}
+								
+								$titolo = $riga['note_varie'];
+								?>
 							
-							
-							if ($titolo!=""){
-							?>
-					</dl>
+					<div class="biglietto">
 					<?php
-						print $link_prenotazione;
+								print "<h2>$titolo</h2>";
 					?>
-				</div>
-							<?php
+						<dl>
+					<?php
 							}
 							
-							$titolo = $riga['note_varie'];
-							?>
-							
-				<div class="biglietto">
-				<?php
-							print "<h2>$titolo</h2>";
-				?>
-					<dl>
-				<?php
+							$nome_biglietto = $riga['nome'];
+							$descrizione_biglietto=$riga['descrizione'];
+							$prezzo_biglietto = $riga['prezzo'];
+							print "<dt>$nome_biglietto $descrizione_biglietto</dt>";
+							if ($prezzo_biglietto!=0){
+								print "<dd>&euro;$prezzo_biglietto</dd>";
+							}else{
+								print "<dd>GRATIS</dd>";
+							}
 						}
-						
-					$nome_biglietto = $riga['nome'];
-					$descrizione_biglietto=$riga['descrizione'];
-					$prezzo_biglietto = $riga['prezzo'];
-					print "<dt>$nome_biglietto $descrizione_biglietto</dt>";
-					print "<dd>&euro;$prezzo_biglietto</dd>";
-					}
-				?>
-				
+					?>
+					
 					</dl>
 				</div>
+				<?php
+					}
+					
+					if ($step==1){
+					?>
+					<div class="biglietto">
+						<h3>Prenota la tua visita!</h3>
+						<form action="prenota.php" method="post">
+							<fieldset>
+								<label for="tipo_biglietto">Seleziona il biglietto che desideri prenotare</label>
+								<select name="tipo_biglietto" id="tipo_biglietto">
+									<option value ="-1" selected="selected" disabled="disabled">Seleziona</option>
+									<?php
+										$titolo="";
+										$prezzo=0;
+										foreach ($biglietti as &$riga ){
+											if ($riga['note_varie']!=$titolo){	
+												if($titolo==""){
+													$titolo=$riga['note_varie'];
+												}
+												print '<option value="-1" disabled="disabled">'.$titolo.'</option>';
+											}
+											$titolo = $riga['note_varie'];
+											print '<option value="'.$riga['ID_Tipologia_Prenotazione'].'" ';
+											
+											if ($riga['ID_Tipologia_Prenotazione']==$selezione_tipo_biglietto){
+												print ' selected="selected"';
+											}
+											
+											print '>'.$riga['nome'].' ';
+											$prezzo=$riga['prezzo'];
+											if($prezzo>0){
+												$prezzo="&euro; ".$prezzo;
+											}else{
+												$prezzo = "GRATIS";
+											}
+											print $prezzo.'</option>';
+										}
+									?>
+								</select>
+								<label for="numero_biglietti">Numero di biglietti da acquistare</label>
+								<input type="text" name="numero_biglietti" id="numero_biglietti" value="<?php print $quantita_biglietti; ?>" />
+								<label for="data">Data di arrivo: </label>
+								<input type="text" name="data" id="data" value="<?php
+									if ($data==""){
+										echo date("Y").'/'.date("m").'/'.date("d");
+									} else 
+									{
+										echo $data;
+									} 
+								?>" />
+								<input type="submit" name="invia" id="invia" value="Prenota" />
+								<input type="hidden" name="step" value="2"/>
+								<?php
+									if ($errori!=""){
+										?>
+										<h2 class="warning"><?php print $errori;?></h2>
+										<?php
+									}
+								?>
+							</fieldset>
+						</form>
+					<?php
+					
+					
+					?>
+					</div>
+					<?php
+					}
+					if(($step==2) & ($errori=="")){
+						?>
+							<h3>Complimenti, la prenotazione &egrave; stata effettuata!</h3>
+							<p><a href="index.html">Torna alla homepage</a></p>
+						<?php
+					}
+					
+				?>
+				
 				</div><!--box-->
 			</div><!-- chiudo contenuto-->
 			

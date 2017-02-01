@@ -19,6 +19,20 @@
 		$res=hash_pbkdf2("sha256", $password, $username, 50, 50);
 		return $res;
 	}
+	
+	function converti_data($data){
+		return str_replace('/','-', $data);
+	}
+
+	function controlla_data($data){
+		preg_match("/[0-9]{4}\/[0-9]{2}\/[0-9]{2}/", $data, $risultato_regex);
+		if ($risultato_regex != null){
+			if ($risultato_regex[0]==$data) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 
 	/* eseguo il login, restituisco True se il login è ok */
 	function login($username, $password) {
@@ -36,15 +50,16 @@
     		printf("Connect failed: %s\n", mysqli_connect_error());
 			return -1;
 		}
-		if ($stmt = mysqli_prepare($oggetto_db, 'SELECT email FROM Utente_Registrato WHERE email = ? AND password = ? ')){
+		if ($stmt = mysqli_prepare($oggetto_db, 'SELECT email, ID_Utente_Registrato FROM Utente_Registrato WHERE email = ? AND password = ? ')){
 			$psw2= generaPSW($password, $username);
    			mysqli_stmt_bind_param($stmt, "ss", $username, $psw2);
     		mysqli_stmt_execute($stmt);
-    		mysqli_stmt_bind_result($stmt, $ema);
+    		mysqli_stmt_bind_result($stmt, $ema, $id_reg);
     		mysqli_stmt_fetch($stmt);
     		
   			if ($username == $ema) {
   				$trovato = 1;
+  				$_SESSION['userID']= $id_reg;
   			}
   			
     		mysqli_stmt_close($stmt);
@@ -102,23 +117,27 @@
 		global $password_utente_db;
 		global $nome_db;
 		
+		
 		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
 		
 		$trovato = 1;
+		
+		$data_convertita = converti_data($data);
 		
 		if (mysqli_connect_errno()) {
     		printf("Connect failed: %s\n", mysqli_connect_error());
 			return -1;
 		}
 		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Prenotazione (data, numero_posti_disponibili, ID_Sede, ID_Tipologia_prenotazione, ID_Utente_registrato) values (?, ?, ?, ?, ?)')){
-			mysqli_stmt_bind_param($stmt, "siiii", $data, $posti, $trovato, $tipo_prenotazione, $id_utente);
-    		mysqli_stmt_execute($stmt);
+			mysqli_stmt_bind_param($stmt, "siiii",  $data_convertita, $posti, $trovato, $tipo_prenotazione, $id_utente);
+			mysqli_stmt_execute($stmt);
   			
     		mysqli_stmt_close($stmt);
+    		$trovato = 2;
 		}
 		mysqli_close($oggetto_db);
 		
-		return 2;
+		return $trovato;
 	}
 	function leggi_tipologie_di_prenotazione(){
 		global $host_db;

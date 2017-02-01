@@ -4,6 +4,11 @@
 		session_destroy();
 		session_start();
 	}
+	
+	if ($_SESSION['login']!=""){
+		header('Location: '.$_SESSION['page']);
+	}
+	
 	include 'database.php';
 	/*
 		per prima cosa, controllo se ho eseguito un login
@@ -111,18 +116,19 @@
 				$trovato_errori = 1;
 			}
 			$risultato_regex="";
-			preg_match("/[0-9]{4}\/[0-9]{2}\/[0-9]{2}/", $dataDiNascita, $risultato_regex);
-			if ($risultato_regex != null){
-				if ($risultato_regex[0]!=$dataDiNascita) {
+			if (controlla_data($dataDiNascita)==0) {
 					$errori['dataDiNascita']=1;
 					$trovato_errori = 1;
-				}else {
-					$dataDiNascita = str_replace('/','-', $dataDiNascita);
-					print $dataDiNascita;
-				}
+					
 			}else {
-					$errori['dataDiNascita']=1;
-					$trovato_errori = 1;
+					$dataDiNascita = str_replace('/','-', $dataDiNascita);
+					$date = new DateTime(converti_data($dataDiNascita));
+					$now = new DateTime();
+					$date->modify('+18 year');
+					if ($date>$now){
+						$errori['dataDiNascita']=1;
+						$trovato_errori = 1;
+					}
 			}
 			$risultato_regex="";
 			preg_match("/[a-zA-Z\s]+/", $cognome, $risultato_regex);
