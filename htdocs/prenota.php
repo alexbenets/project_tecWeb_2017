@@ -110,7 +110,7 @@
 					</a>
 				</li>
 				<li>
-					<a <a href="esposizioni.html">Esposizioni</a>
+					<a href="esposizioni.html">Esposizioni</a>
 				</li>
 				<li>
 					<a href="sede.html">Sede</a>
