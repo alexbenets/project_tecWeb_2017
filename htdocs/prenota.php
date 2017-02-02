@@ -274,13 +274,13 @@
 							<h3>Complimenti, la prenotazione &egrave; stata effettuata!</h3>
 							<p>Recati il giorno <?php print $data; ?> per pagare in cassa e ricevere il biglietto d'ingresso!</p>
 							<p><a href="index.html">Torna alla homepage</a></p>
-							<p><a href="utente.php">Gestisci il tuo profilo</a></p>
+							<p><a href="login.php?area_utente=1">Gestisci il tuo profilo</a></p>
 						<?php
 					}else{
 						print "<h3>$errori</h3>";
 						?>
 						<p><a href="index.html">Torna alla homepage</a></p>
-						<p><a href="utente.php">Gestisci il tuo profilo</a></p>
+						<p><a href="login.php?area_utente=1">Gestisci il tuo profilo</a></p>
 						<?php
 					}
 					
