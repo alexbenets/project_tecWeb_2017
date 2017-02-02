@@ -1,0 +1,6 @@
+per le immagini di presentazione dei protagonisti ho finora usato la regola css
+img{
+	height:15em;
+	width:20em;
+}
+per uniformare l'aspetto delle pagine, spero possa tornare utile anche nella nuova varsione del css ma non la ho ancora aggiunta di nuovo
