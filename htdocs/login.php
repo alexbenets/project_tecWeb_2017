@@ -4,12 +4,8 @@
 		session_destroy();
 		session_start();
 	}
-	$modifica_utente=0;
 	
-	if (isset($_GET['area_utente']) | isset($_POST['area_utente'])){
-		$modifica_utente=1;
-	}
-	if (($_SESSION['login']!="") and ($modifica_utente==0)){
+	if ($_SESSION['login']!=""){
 		header('Location: '.$_SESSION['page']);
 	}
 	
@@ -31,8 +27,6 @@
 	$confermaPassword = "";
 	$email = "";
 	
-	$id_utente="";
-	
 	$errori=array();
 	
 	$errori['nome']=0;
@@ -47,8 +41,7 @@
 	
 	$messaggio="";
 	
-	
-	if (isset($_POST['loginF']) & ($modifica_utente==0)) {
+	if (isset($_POST['loginF'])) {
 		/*
 			eseguo il login.
 		*/
@@ -80,7 +73,6 @@
 	} else {
 		/*
 			sto eseguendo una registrazione per un nuovo utente.
-			oppure la modifica dei dati utente
 		*/
 		$entra= (isset($_POST['entra']))? $_POST['entra'] : '0';
 		
@@ -107,25 +99,16 @@
 		}
 		
 		/* controllo i campi */
-		if (($entra=='Iscriviti') | ($modifica_utente==1)) {
-			if(($modifica_utente==0) | (isset($_POST['area_utente']))){
-				$nome = (isset($_POST['nome']))? $_POST['nome'] : 'Nome';
-				$cognome = (isset($_POST['cognome']))? $_POST['cognome'] : 'Cogome';
-				$dataDiNascita = (isset($_POST['dataDiNascita']))? $_POST['dataDiNascita'] : 'GG/MM/AAAA';
-				$codice_fiscale = (isset($_POST['codice_fiscale']))? $_POST['codice_fiscale'] : 'codice_fiscale';
-				$password = (isset($_POST['password']))? $_POST['password'] : 'pass';
-				$confermaPassword = (isset($_POST['confermaPassword']))? $_POST['confermaPassword'] : 'word';
-				$email = (isset($_POST['email']))? $_POST['email'] : 'info@example.org';
-			} else {
-				$dati_utente = leggi_utente();
-				$nome = $dati_utente['nome'];
-				$cognome = $dati_utente['cognome'];
-				$dataDiNascita = $dati_utente['data_nascita'];
-				$codice_fiscale = $dati_utente['codice_fiscale'];
-				$password = '';
-				$confermaPassword = '';
-				$email = $dati_utente['email'];
-			}
+		if ($entra=='Iscriviti') {
+		
+			$nome = (isset($_POST['nome']))? $_POST['nome'] : 'Nome';
+			$cognome = (isset($_POST['cognome']))? $_POST['cognome'] : 'Cogome';
+			$dataDiNascita = (isset($_POST['dataDiNascita']))? $_POST['dataDiNascita'] : 'GG/MM/AAAA';
+			$codice_fiscale = (isset($_POST['codice_fiscale']))? $_POST['codice_fiscale'] : 'codice_fiscale';
+			$password = (isset($_POST['password']))? $_POST['password'] : 'pass';
+			$confermaPassword = (isset($_POST['confermaPassword']))? $_POST['confermaPassword'] : 'word';
+			$email = (isset($_POST['email']))? $_POST['email'] : 'info@example.org';
+			
 			$risultato_regex="";
 			preg_match("/[a-zA-Z\s]+/", $nome, $risultato_regex);
 			if ($risultato_regex[0]!=$nome) {
@@ -177,37 +160,18 @@
 				$trovato_errori = 1;
 			}
 			if ($trovato_errori==0){
+				$utente_gia_registrato=registraUtente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
 				
-				if($modifica_utente==0){
-					$utente_gia_registrato=registraUtente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
-				
-					if ($utente_gia_registrato == 2 ){
-						$logged= (login(trim($nome), trim($password)));
-						if ($logged==1) {
-							$_SESSION['login'] = $nome;
-							header('Location: index.html');
-						}else{
-							$trovato_errori = 1;
-						}
+				if ($utente_gia_registrato == 2 ){
+					$logged= (login(trim($nome), trim($password)));
+					if ($logged==1) {
+						$_SESSION['login'] = $nome;
+						header('Location: index.html');
 					}else{
-						$messaggio="Utente gi&agrave; registrato!";
+						$trovato_errori = 1;
 					}
 				}else{
-					/* se sto per modificare*/
-					if(isset($_POST['area_utente'])){
-						if ($password=="" | $confermaPassword==""){
-							$password="";
-						}
-						$res_aggiornamento=aggiorna_utente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
-						if($res_aggiornamento==2){
-							$messaggio="Dati modificati correttamente.";
-						}else{
-							$messaggio="C'&egrave; stato un problema nella modifica dei dati personali!";
-						}
-					}else{
-						$messaggio="Modifica i tuoi dati";
-					
-					}
+					$messaggio="Utente gi&agrave; registrato!";
 				}
 			}
 		}
@@ -222,7 +186,7 @@
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
 		<title>Login</title>
-		<meta name="keywords" content="login, registrazione, acquario PLACEHOLDER" />
+		<meta name="keywords" content="login, registrazione, acquario Thalassa" />
 		<meta name="description" content="pagina per la registrazione e/o il login al sito" />
 		<meta name="language" content="italian it" />
 		<meta name="author" content="GRUPPO" />
@@ -258,7 +222,7 @@
   						<a href="ambiente.html">Educazione all'ambiente</a>
   					</li>
   					<li>
-  						<a href="#biglietti">Biglietti</a>
+  						<a href="prenota.php">Biglietti</a>
   					</li>
   					<li>
   						<a href="#chi siamo">Chi siamo</a>
@@ -278,7 +242,8 @@
 
 			<div id="path">
 				<span>Ti trovi in: </span>
-				<span>Home</span>
+				<span><a href="index.html">Home</a></span>
+				<span>Login e registrazione</span>
 			</div><!-- chiudo path-->
 		
 		</div><!-- chiudo header-->
@@ -297,8 +262,7 @@
 		Try to check the spelling and case of the id you are referring to. -->
 			<div id="contenuto">
 				<?php
-				
-				if ((! isset($_GET['iscriviti']) ) & (! isset($_POST['iscriviti'])) & ($modifica_utente==0)){
+				if ((! isset($_GET['iscriviti']) ) & (! isset($_POST['iscriviti']))){
 				?>
 				<form action="login.php" method="post">
 					<fieldset>
@@ -326,17 +290,8 @@
 								<?php
 							}
 						
-						if($modifica_utente==0){
 						?>
 						<h2>Benvenuto nuovo utente, per poterti registrare, dovresti compilare i seguenti campi:</h2>
-						<?php
-						}else{
-						?>
-						<h2>Benvenuto nella tua area personale; qui puoi aggiornare i tuoi dati.</h2>
-						<?php
-						}
-						
-						?>
 						<label for="nome">Nome</label>
 						<input type="text" name="nome" id="nome" value="<?php print $nome ?>" /><?php if ($errori['nome']>0){print $testo_errore;}?>
 						<label for="cognome">Cognome</label>
@@ -351,15 +306,8 @@
 						<input type="password" name="password" id="passwordR" value="<?php print $password ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
 						<label for="confermaPassword">Conferma password</label>
 						<input type="password" name="confermaPassword" id="confermaPassword" value="<?php print $confermaPassword ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
-						<?php
-						$txt_pulsante = "Iscriviti";
-						if($modifica_utente==1){
-							$txt_pulsante="Aggiorna";
-							print '<input type="hidden" id="area_utente" name="area_utente" value="1"/>';
-						}
-						print "<label for=\"entraR\">$txt_pulsante</label>";
-						print "<input type=\"submit\" name=\"entra\" id=\"entraR\" value=\"$txt_pulsante\" />";
-						?>
+						<label for="entraR">Iscriviti</label>
+						<input type="submit" name="entra" id="entraR" value="Iscriviti" />
 						<input type="hidden" name="iscriviti" value="1" />
 					</fieldset>
 				</form>

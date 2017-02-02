@@ -31,12 +31,6 @@
 				return 1;
 			}
 		}
-		preg_match("/[0-9]{4}-[0-9]{2}-[0-9]{2}/", $data, $risultato_regex);
-		if ($risultato_regex != null){
-			if ($risultato_regex[0]==$data) {
-				return 1;
-			}
-		}
 		return 0;
 	}
 
@@ -73,34 +67,6 @@
 		mysqli_close($oggetto_db);
 		
 		return $trovato;
-	}
-	
-	function leggi_utente(){
-	
-		global $host_db;
-		global $nome_utente_db;
-		global $password_utente_db;
-		global $nome_db;
-		
-		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
-		
-		
-		$risultato=array();
-		if (mysqli_connect_errno()) {
-    		printf("Connect failed: %s\n", mysqli_connect_error());
-			return -1;
-		}
-		$query = 'SELECT * FROM Utente_Registrato WHERE ID_Utente_Registrato = '.$_SESSION['userID'];
-		if ($result = mysqli_query($oggetto_db, $query)) {
- 			/* fetch associative array */
-			$risultato = mysqli_fetch_assoc($result);
-		    /* free result set */
-		    mysqli_free_result($result);
-		}
-
-		mysqli_close($oggetto_db);
-		
-		return $risultato;
 	}
 	
 	function registraUtente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password) {
@@ -144,46 +110,6 @@
 		
 		return 2;
 	} 
-	
-	function aggiorna_utente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password){
-		global $host_db;
-		global $nome_utente_db;
-		global $password_utente_db;
-		global $nome_db;
-		
-		$oggetto_db = mysqli_connect($host_db, $nome_utente_db, $password_utente_db, $nome_db);
-		
-		
-		$trovato = 0;
-		$psw2="";
-		if (mysqli_connect_errno()) {
-    		printf("Connect failed: %s\n", mysqli_connect_error());
-			return -1;
-		}
-		if ($stmt = mysqli_prepare($oggetto_db, 'SELECT password FROM Utente_Registrato WHERE ID_Utente_Registrato = ?')){
-   			mysqli_stmt_bind_param($stmt, "i", $_SESSION['userID']);
-    		mysqli_stmt_execute($stmt);
-    		mysqli_stmt_bind_result($stmt, $psw2);
-    		mysqli_stmt_fetch($stmt);
-    		
-  			
-    		mysqli_stmt_close($stmt);
-		}
-		
-		if ($stmt = mysqli_prepare($oggetto_db, 'UPDATE Utente_Registrato SET nome = ?, cognome = ?, codice_fiscale = ?, data_nascita = ?, email = ?, password = ? WHERE ID_Utente_Registrato = ?')){
-			if($password!=""){
-				$psw2= generaPSW($password, $email);
-			}
-			mysqli_stmt_bind_param($stmt, "ssssssi", $nome, $cognome, $codice_fiscale, $data_di_nascita, $email,$psw2, $_SESSION['userID']);
-    		mysqli_stmt_execute($stmt);
-    		mysqli_stmt_close($stmt);
-		}else{
-				return 0;
-		}
-		mysqli_close($oggetto_db);
-		
-		return 2;
-	}
 	
 	function prenota($data, $posti, $tipo_prenotazione, $id_utente){
 		global $host_db;
