@@ -88,7 +88,7 @@ h1,h2,h3,h4,h5,h6 {
     text-decoration: none;
 }
 
-#nav li .a:hover:not(.active) {
+#nav li a:hover:not(.active) {
     background-color: #111;
 }
 
@@ -99,7 +99,7 @@ h1,h2,h3,h4,h5,h6 {
 
 /*MAIN*/
 #main{
-    background-color:#1E90ff;
+    background-color:#ffffff;
     margin:0px;
     margin-left:17%;
 }
@@ -108,6 +108,13 @@ h1,h2,h3,h4,h5,h6 {
 	width: 100%;
 	height: 440px;
 	margin: 0px;
+}
+
+#content{
+    background-color:#AAAAAA;
+    margin:0px;
+    padding:0.1em 1.5em 0.5em;
+    font-size: 1.2em;
 }
 /*FINE MAIN*/
 
