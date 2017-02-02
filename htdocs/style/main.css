@@ -56,6 +56,11 @@ h1,h2,h3,h4,h5,h6 {
     padding-left:1.0em;
     font-size: 1.2em;
 }
+
+#path a{
+	margin-right:1em;
+	color:#88BBEE;
+}
 /*FINE PATH*/
 
 /*NAV*/
@@ -115,6 +120,48 @@ h1,h2,h3,h4,h5,h6 {
     margin:0px;
     padding:0.1em 1.5em 0.5em;
     font-size: 1.2em;
+}
+
+#content img{
+	height:15em;
+	width:20em;
+	float:left;
+	margin-right: 1em;
+}
+
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+	background-color:;
+	}
+th {background-color:#333399;
+	color:#ffffff;
+}
+td{
+	background-color:#666699;
+}
+.normal{
+	background-color:#666699;
+}
+.hollow{
+	background-color:#333399;
+}
+.holyday{
+	background-color:#00ffff;
+}
+.highSeason{
+	background-color:#9999ff;
+}
+
+body{
+	background-color:#AAAAAA;
 }
 /*FINE MAIN*/
 
