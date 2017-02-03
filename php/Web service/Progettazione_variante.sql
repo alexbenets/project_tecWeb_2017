@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS Utilizzo_Biglietto;
 CREATE TABLE Utilizzo_Biglietto (
 	ID_Utilizzo_Biglietto INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	data DATE,
-	numero_posti CHAR(10),
+	numero_posti INT,
 	ID_Prenotazione INT NOT NULL,
 	FOREIGN KEY (ID_Prenotazione) REFERENCES Prenotazione (ID_Prenotazione)
 );
