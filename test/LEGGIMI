@@ -1,0 +1,9 @@
+-rivista la tabella della pagina orario.html per visibilità, comprensione e accessibilità 
+
+-inseriti link di aiuto ai non vedenti, con css appropriato (perchè non siano visibili sulle pagine ma accessibili), su tutte le pagine
+    
+-sarà da fare l'ennesimo controllo di validità MA non dovrebbe dovuto causare alcun problema, le pagine erano corrette prima & ho 
+    rivalidato 2 pagine di prova una volta effettuato l'inserimento dei link (si trovano subito dopo <div id="path"> su tutte le pagine)
+
+-analizzati i colori delle pagine campione (index.html, orario.html, esposizioni.html) e del path di cavalluccio.html con 
+    http://www.vischeck.com/ per assicurarsi della visibilità degli elementi; direi che è decente, allego le immagini risultato
