@@ -41,37 +41,44 @@
 			$quantita_biglietti = -1;
 		}
 		if ($selezione_tipo_biglietto == -1){
-			$errori = $errori."<p>Attenzione: non &egrave; stato selezionato un biglietto valido.</p>";
+			$errori = $errori."Attenzione: non &egrave; stato selezionato un biglietto valido.";
 			$step=1;
 		}
 		if ($quantita_biglietti >= 50 ){
-			$errori = $errori."<p>Attenzione: non &egrave; consentito acquistare pi&ugrave; di 50 biglietti per prenotazione.</p>";
+			$errori = $errori."Attenzione: non &egrave; consentito acquistare pi&ugrave; di 50 biglietti per prenotazione.";
 			$step=1;
 		}
 		if ($quantita_biglietti < 1 ){
-			$errori = $errori."<p>Attenzione: non hai specificato la quantit&agrave; di biglietti richiesti.</p>";
+			$errori = $errori."Attenzione: non hai specificato la quantit&agrave; di biglietti richiesti.";
 			$step=1;
 		}
 		if (controlla_data($data)==0 ){
-			$errori = $errori."<p>Attenzione: non hai inserito una data corretta.</p>";
+			$errori = $errori."Attenzione: non hai inserito una data corretta.";
 			$step=1;
 		}else {
 			
 			$date = new DateTime(converti_data($data));
 			$now = new DateTime();
 			if ($date<$now){
-				$errori = $errori."<p>Attenzione: la data dev'essere nel futuro.</p>";
+				$errori = $errori."Attenzione: puoi prenotare i biglietti con almeno un giorno d'anticipo.";
 				$step=1;
 			}
 		}
 	}
 	/* ho superato indenne la fase di verifica, procedo con la prenotazione.*/
 	if ($step==2){
-		$res=prenota($data, $quantita_biglietti, $selezione_tipo_biglietto, $_SESSION['userID']);
-		if ($res!=2){
-			$errori = $errori ."<p>Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.</p>";
+		/* semplice verifica contro i ricaricamenti della pagina. */
+		if($_POST['rnd_str']==$_SESSION['rnd_prenotazione']){
+			/* consumo il token */
+			$_SESSION['rnd_prenotazione']="0";
+			$res=prenota($data, $quantita_biglietti, $selezione_tipo_biglietto, $_SESSION['userID']);
+			if ($res!=2){
+				$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
+			}
+		}else{
+			$res=0;
+			$errori=$errori."Attenzione: hai gi&agrave; effettuato questa prenotazione.";
 		}
-		
 	}
 ?>
 
@@ -83,8 +90,8 @@
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
 		<title>biglietti</title>
-		<meta name="keywords" content="biglietti, singoli, gruppi, scolaresche, acquario di Thalassa" />
-		<meta name="description" content="pagina relativa ai prezzi dei bilgietti per l'acquario di Thalassa" />
+		<meta name="keywords" content="biglietti, singoli, gruppi, scolaresche, acquario di PLACEHOLDER" />
+		<meta name="description" content="pagina relativa ai prezzi dei bilgietti per l'acquario di PLACEHOLDER" />
 		<meta name="language" content="italian it" />
 		<meta name="author" content="GRUPPO" />
 	</head>
@@ -103,53 +110,50 @@
 			<div id="menu">
 				<ul>
  					<li>
-					<a href="index.html">
-						<span xml:lang="en">
-							Home
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href="esposizioni.html">Esposizioni</a>
-				</li>
-				<li>
-					<a href="sede.html">Sede</a>
-				</li>
-				<li>
-					<a href="storia.html">Storia</a>
-				</li>
-				<li>
-					<a href="educazione.html">Educazione all'ambiente</a>
-				</li>
-				<li>
-					<a href="prenota.php">Biglietti</a>
-				</li>
-				<li>
-					<a href="orario.html">Orario</a>
-				</li>
-				<li>
-					<a href="comeArrivare.html">Come arrivare</a>
-				</li>
-				<li>
-					<a href="contatti.html">Contatti</a>
-				</li>
-				<li>
-					<a href="#pagina utente">Pagina utente</a>
-				</li>
+ 						<a href="index.html">Home</a>
+ 					</li>
+  					<li>
+  						<a href="#sale">Sale</a>
+  					</li>
+  					<li>
+  						<a href="#sede">Sede</a>
+  					</li>
+  					<li>
+  						<a href="#storia">Storia</a>
+  					</li>
+  					<li>
+  						<a href="#educazione">Educazione all'ambiente</a>
+  					</li>
+  					<li>
+  						<a class="active" href="#biglietti">Biglietti</a>
+  					</li>
+  					<li>
+  						<a href="#chi siamo">Chi siamo</a>
+  					</li>
+  					<li>
+  						<a href="#orario">Orario</a>
+  					</li>
+  					<li>
+  						<a href="#contatti">Contatti</a>
+  					</li>
+  					<li>
+  						<a href="#pagina utente">Pagina utente</a>
+  					</li>
 				</ul>
 			</div><!-- chiudo menu -->
 			<div class="clearer"></div>
 
-			<div id="path"><a id="help" href="#content">salta navigazione</a>
+			<div id="path">
 				<span>Ti trovi in: </span>
-				<span><a href="index.html">Home</a></span>
+				<span>Home</span>
 				<span>Biglietti</span>
 			</div><!-- chiudo path-->
 		
 		</div><!-- chiudo header-->
-			<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
+				<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
 		
-			<div id="content">
+			<div id="contenuto">
+			<div id="box">
 				<?php
 					$titolo="";
 					if ($step==0){
@@ -195,6 +199,8 @@
 					}
 					
 					if ($step==1){
+						/*  genero una stringa casuale, così da evitare doppie prenotazioni */
+						$_SESSION['rnd_prenotazione'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 					?>
 					<div class="biglietto">
 						<h3>Prenota la tua visita!</h3>
@@ -204,6 +210,7 @@
 								<select name="tipo_biglietto" id="tipo_biglietto">
 									<option value ="-1" selected="selected" disabled="disabled">Seleziona</option>
 									<?php
+										
 										$titolo="";
 										$prezzo=0;
 										foreach ($biglietti as &$riga ){
@@ -244,6 +251,8 @@
 								?>" />
 								<input type="submit" name="invia" id="invia" value="Prenota" />
 								<input type="hidden" name="step" value="2"/>
+								<!-- token per la prenotazione -->
+								<input type="hidden" name="rnd_str" value="<?php print $_SESSION['rnd_prenotazione'];?>"/>
 								<?php
 									if ($errori!=""){
 										?>
@@ -263,11 +272,21 @@
 					if(($step==2) & ($errori=="")){
 						?>
 							<h3>Complimenti, la prenotazione &egrave; stata effettuata!</h3>
+							<p>Recati il giorno <?php print $data; ?> per pagare in cassa e ricevere il biglietto d'ingresso!</p>
 							<p><a href="index.html">Torna alla homepage</a></p>
+							<p><a href="login.php?area_utente=1">Gestisci il tuo profilo</a></p>
+						<?php
+					}else{
+						print "<h3>$errori</h3>";
+						?>
+						<p><a href="index.html">Torna alla homepage</a></p>
+						<p><a href="login.php?area_utente=1">Gestisci il tuo profilo</a></p>
 						<?php
 					}
 					
 				?>
+				
+				</div><!--box-->
 			</div><!-- chiudo contenuto-->
 			
 		</div><!-- chiudo main-->
