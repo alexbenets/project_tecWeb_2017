@@ -3,7 +3,9 @@
 	require "database.php";
 	
 	$_SESSION['page']="prenota.php";
-	
+	if(!isset($_SESSION['login'])){
+		$_SESSION['login']="";
+	}
 	/* controllo se ho effettuato l'accesso */
 	$biglietti = leggi_tipologie_di_prenotazione();
 	$link_prenotazione='<a href="login.php">Accedi per prenotare</a>';
@@ -280,7 +282,11 @@
 						print "<h3>$errori</h3>";
 						?>
 						<p><a href="index.html">Torna alla homepage</a></p>
-						<p><a href="login.php?area_utente=1">Gestisci il tuo profilo</a></p>
+						<p><a href="login.php?area_utente=1"><?php 
+										if($_SESSION['login']!="")
+										{print "Gestisci il tuo profilo";}
+										else
+										{print "Accedi per prenotare";} ?></a></p>
 						<?php
 					}
 					

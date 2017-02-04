@@ -5,9 +5,9 @@
 		questo file contiene i riferimenti al DB
 	*/
 	$host_db="127.0.0.1";
-	$nome_utente_db="tecweb";
-	$password_utente_db="tecweb";
-	$nome_db="tecweb";
+	$nome_utente_db="mmorra";
+	$password_utente_db="yieSeeja9sha3eeg";
+	$nome_db="mmorra";
 	
 
 

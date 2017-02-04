@@ -6,7 +6,10 @@
 	}
 	$modifica_utente=0;
 	
-	if (isset($_GET['area_utente']) | isset($_POST['area_utente'])){
+	if(! isset($_SESSION['login'])){
+		$_SESSION['login']="";
+	}
+	if (($_SESSION['login']!="") & (isset($_GET['area_utente']) | isset($_POST['area_utente']))){
 		$modifica_utente=1;
 	}
 	if (($_SESSION['login']!="") and ($modifica_utente==0)){
