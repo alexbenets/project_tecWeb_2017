@@ -12,11 +12,19 @@
 	if (($_SESSION['login']!="") & (isset($_GET['area_utente']) | isset($_POST['area_utente']))){
 		$modifica_utente=1;
 	}
+	if($modifica_utente==1){
+		$_SESSION['page']="index.php?area_utente=1";
+	}
 	if (($_SESSION['login']!="") and ($modifica_utente==0)){
-		header('Location: '.$_SESSION['page']);
+		header('Location: '.$_SERVER['REFERER'].$_SESSION['page']);
 	}
 	
+	//include_once 'Web_service/db_aquarium.php';
 	include 'database.php';
+	include 'funzioniComuni.php';
+	// public function __construct($id_utente_registrato, $nome, $cognome, $codice_fiscale, $data_nascita, $numero_numero_telefono, $email, $password)
+   
+	//$classe_utente= new Utente_registrato(0,"","","","","","","");
 	/*
 		per prima cosa, controllo se ho eseguito un login
 	
@@ -32,6 +40,7 @@
 	$codice_fiscale = "";
 	$password = "";
 	$confermaPassword = "";
+	$numero_telefono="";
 	$email = "";
 	
 	$id_utente="";
@@ -43,6 +52,7 @@
 	$errori['dataDiNascita']=0;
 	$errori['codice_fiscale']=0;
 	$errori['password']=0;
+	$errori['numero_telefono']=0;
 	$errori['email']=0;
 	
 	$trovato_errori = 0;
@@ -108,6 +118,9 @@
 		if (!(isset($_POST['email']))){
 			$email = "info@example.com";
 		}
+		if (!(isset($_POST['numero_telefono']))){
+			$numero_telefono = "0123-456789";
+		}
 		
 		/* controllo i campi */
 		if (($entra=='Iscriviti') | ($modifica_utente==1)) {
@@ -119,12 +132,14 @@
 				$password = (isset($_POST['password']))? $_POST['password'] : 'pass';
 				$confermaPassword = (isset($_POST['confermaPassword']))? $_POST['confermaPassword'] : 'word';
 				$email = (isset($_POST['email']))? $_POST['email'] : 'info@example.org';
+				$numero_telefono = (isset($_POST['numero_telefono']))? $_POST['numero_telefono'] : '0123-456789';
 			} else {
 				$dati_utente = leggi_utente();
 				$nome = $dati_utente['nome'];
 				$cognome = $dati_utente['cognome'];
 				$dataDiNascita = $dati_utente['data_nascita'];
 				$codice_fiscale = $dati_utente['codice_fiscale'];
+				$numero_telefono = $dati_utente['numero_telefono'];
 				$password = '';
 				$confermaPassword = '';
 				$email = $dati_utente['email'];
@@ -182,13 +197,13 @@
 			if ($trovato_errori==0){
 				
 				if($modifica_utente==0){
-					$utente_gia_registrato=registraUtente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
+					$utente_gia_registrato=registraUtente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password, $numero_telefono);
 				
 					if ($utente_gia_registrato == 2 ){
-						$logged= (login(trim($nome), trim($password)));
+						$logged= (login($email, $password));
 						if ($logged==1) {
 							$_SESSION['login'] = $nome;
-							header('Location: index.html');
+							header('Location: '.$_SERVER['REFERER'].'/index.html');
 						}else{
 							$trovato_errori = 1;
 						}
@@ -201,7 +216,7 @@
 						if ($password=="" | $confermaPassword==""){
 							$password="";
 						}
-						$res_aggiornamento=aggiorna_utente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password);
+						$res_aggiornamento=aggiorna_utente($nome, $cognome, $dataDiNascita, $email, $codice_fiscale, $password, $numero_telefono);
 						if($res_aggiornamento==2){
 							$messaggio="Dati modificati correttamente.";
 						}else{
@@ -215,90 +230,9 @@
 			}
 		}
 	}
-
+	stampa_head('Login', "Pagina utente");
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
-
-	<head>
-		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
-		<title>Login</title>
-		<meta name="keywords" content="login, registrazione, acquario PLACEHOLDER" />
-		<meta name="description" content="pagina per la registrazione e/o il login al sito" />
-		<meta name="language" content="italian it" />
-		<meta name="author" content="GRUPPO" />
-		<meta name="robots" content="noindex, nofollow" />
-	</head>
-	<body>
-	<div id="header">
-
-			<div id="banner">
-				<h1>Acquario</h1>
-				<h2>La magia dell'oceano davanti a te!</h2>
-				
-				<div id="description">
-					<span></span>
-				</div>
-			</div><!-- chiudo banner-->
-			
-			<div id="menu">
-				<ul>
- 					<li>
- 						<a href="index.html">Home</a>
- 					</li>
-  					<li>
-  						<a href="sezioni.html">Sale</a>
-  					</li>
-  					<li>
-  						<a href="sede.html">Sede</a>
-  					</li>
-  					<li>
-  						<a href="storia.html">Storia</a>
-  					</li>
-  					<li>
-  						<a href="ambiente.html">Educazione all'ambiente</a>
-  					</li>
-  					<li>
-  						<a href="#biglietti">Biglietti</a>
-  					</li>
-  					<li>
-  						<a href="#chi siamo">Chi siamo</a>
-  					</li>
-  					<li>
-  						<a href="orario.html">Orario</a>
-  					</li>
-  					<li>
-  						<a href="contatti.html">Contatti</a>
-  					</li>
-  					<li>
-  						<a href="#pagina utente">Pagina utente</a>
-  					</li>
-				</ul>
-			</div><!-- chiudo menu -->
-			<div class="clearer"></div>
-
-			<div id="path">
-				<span>Ti trovi in: </span>
-				<span>Home</span>
-			</div><!-- chiudo path-->
-		
-		</div><!-- chiudo header-->
-	
-		<div id="main"><!-- div che contiene tutto il contenuto statico e/o dinamico-->
-		
-		<!-- !!!warning-> problemi con i label, esempio:
-		
-		Line 54 (63), Column 19: reference to non-existent ID "username"
-		<label for="username">Username</label>
-		This error can be triggered by:
-
-		A non-existent input, select or textarea element
-		A missing id attribute
-		A typographical error in the id attribute
-		Try to check the spelling and case of the id you are referring to. -->
-			<div id="contenuto">
+			<div id="content">
 				<?php
 				
 				if ((! isset($_GET['iscriviti']) ) & (! isset($_POST['iscriviti'])) & ($modifica_utente==0)){
@@ -336,6 +270,7 @@
 						}else{
 						?>
 						<h2>Benvenuto nella tua area personale; qui puoi aggiornare i tuoi dati.</h2>
+						<a href="login.php?logout=1">Esci</a>
 						<?php
 						}
 						
@@ -349,7 +284,9 @@
 						<label for="email">Email</label>
 						<input type="text" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
 						<label for="codice_fiscale">Codice Fiscale</label>
-						<input type="text" name="codice_fiscale" id="codice_fiscale" value="<?php print $codice_fiscale ?>" /><?php if ($errori['codice_fiscale']>0){print $testo_errore;}?>
+						<input type="text" name="codice_fiscale" id="codice_fiscale" value="<?php print $codice_fiscale; ?>" /><?php if ($errori['codice_fiscale']>0){print $testo_errore;}?>
+						<label for="numero_telefono">Numero di telefono</label>
+						<input type="text" name="numero_telefono" id="numero_telefono" value="<?php print $numero_telefono; ?>" /><?php if($errori['numero_telefono']>0){print $testo_errore;}?>
 						<label for="passwordR">Password</label>
 						<input type="password" name="password" id="passwordR" value="<?php print $password ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
 						<label for="confermaPassword">Conferma password</label>
@@ -368,41 +305,15 @@
 				</form>
 				<?php
 				}
+				if($trovato_errori>0){
+					print "<h2>Errore</h2>";
+				}
 				if ($messaggio!=""){
 					print "<h2>$messaggio</h2>";
 				}
 				?>
 			</div><!-- chiudo contenuto-->
 
-		</div><!-- chiudo main-->
-		
-		<div id="footer">
-
-			<div id="sitemap">
-				<a href="siteMap.html">Mappa del sito</a>
-			</div> <!-- chiudo sitemap -->
-			<div id="dati_aziendali">
-				<p>Acquario</p>
-				<p>P.IVA: 0764352056C</p>
-			</div><!-- chiudo dati aziendali -->
-			<div id="gruppo">
-				<p>An project by: MarAlFraMar</p>
-			</div><!-- chiudo div del gruppo -->
-			
-			<div id="validazione">
-				<p class="html_valido">
-    				<a href="http://validator.w3.org/check?uri=referer">
-						<img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" />
-					</a>
-	  			</p>
-				<p class="css_valido">
-					<a href="http://jigsaw.w3.org/css-validator/check/referer">
-    					<img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valido!" />
-    				</a>
-				</p>
-				<div class="clearer"></div> <!-- chiudo i float -->
-			</div><!-- chiudo div validazione -->
-
-		</div><!-- chiudo footer-->
-	</body>
-</html>
+<?php
+		stampa_footer();
+?>

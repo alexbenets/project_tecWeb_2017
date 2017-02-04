@@ -62,7 +62,6 @@
     		mysqli_stmt_execute($stmt);
     		mysqli_stmt_bind_result($stmt, $ema, $id_reg);
     		mysqli_stmt_fetch($stmt);
-    		
   			if ($username == $ema) {
   				$trovato = 1;
   				$_SESSION['userID']= $id_reg;
@@ -103,7 +102,7 @@
 		return $risultato;
 	}
 	
-	function registraUtente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password) {
+	function registraUtente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password, $telefono) {
 		global $host_db;
 		global $nome_utente_db;
 		global $password_utente_db;
@@ -133,9 +132,9 @@
 		if ($trovato==1 ){
 			return 1;
 		}
-		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Utente_Registrato (nome, cognome, codice_fiscale, data_nascita, email, password) values (?, ?, ?, ?, ?, ?)')){
+		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Utente_Registrato (nome, cognome, codice_fiscale, data_nascita, email, password, numero_telefono) values (?, ?, ?, ?, ?, ?, ?)')){
 			$psw2= generaPSW($password, $email);
-   			mysqli_stmt_bind_param($stmt, "ssssss", $nome, $cognome, $codice_fiscale, $data_di_nascita, $email,$psw2 );
+   			mysqli_stmt_bind_param($stmt, "sssssss", $nome, $cognome, $codice_fiscale, $data_di_nascita, $email,$psw2,$telefono );
     		mysqli_stmt_execute($stmt);
   			
     		mysqli_stmt_close($stmt);
@@ -145,7 +144,7 @@
 		return 2;
 	} 
 	
-	function aggiorna_utente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password){
+	function aggiorna_utente($nome, $cognome, $data_di_nascita, $email, $codice_fiscale, $password, $numero_telefono){
 		global $host_db;
 		global $nome_utente_db;
 		global $password_utente_db;
@@ -170,11 +169,11 @@
     		mysqli_stmt_close($stmt);
 		}
 		
-		if ($stmt = mysqli_prepare($oggetto_db, 'UPDATE Utente_Registrato SET nome = ?, cognome = ?, codice_fiscale = ?, data_nascita = ?, email = ?, password = ? WHERE ID_Utente_Registrato = ?')){
+		if ($stmt = mysqli_prepare($oggetto_db, 'UPDATE Utente_Registrato SET nome = ?, cognome = ?, codice_fiscale = ?, data_nascita = ?, email = ?, password = ?, numero_telefono = ?  WHERE ID_Utente_Registrato = ?')){
 			if($password!=""){
 				$psw2= generaPSW($password, $email);
 			}
-			mysqli_stmt_bind_param($stmt, "ssssssi", $nome, $cognome, $codice_fiscale, $data_di_nascita, $email,$psw2, $_SESSION['userID']);
+			mysqli_stmt_bind_param($stmt, "sssssssi", $nome, $cognome, $codice_fiscale, $data_di_nascita, $email,$psw2, $numero_telefono, $_SESSION['userID']);
     		mysqli_stmt_execute($stmt);
     		mysqli_stmt_close($stmt);
 		}else{
