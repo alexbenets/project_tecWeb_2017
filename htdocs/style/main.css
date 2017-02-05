@@ -150,8 +150,8 @@ th, td {
     text-align: center;
 	}
 th {
-	/*background-color:#222288;
-	color:#ffffff;*/
+	background-color:#222288;</* rimettere qui le parentesi se si scelgono th bkclr:bianchi, font:nero*/
+	color:#ffffff;
 }
 td{
 	/*background-color:#666699;*/
