@@ -258,3 +258,12 @@ form fieldset a, .link_form {
 	margin-top:10px;
 	margin-bottom:10px;
 }
+
+.tabella_alto_contrasto * {
+	background-color:#fff;
+}
+
+.tabella_alto_contrasto tr th{
+	color:#000;
+	font-weight:bold;
+} 
