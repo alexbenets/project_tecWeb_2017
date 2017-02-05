@@ -299,7 +299,12 @@
 						</div>
 						<div>
 							<label for="email">Email (non modificabile dopo la registrazione)</label>
-							<input type="text" readonly="readonly" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
+							<input type="text"  <?php 
+								if($_SESSION['login']!="")
+									{ 
+										print 'readonly="readonly"';
+									}
+								?> id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
 						</div>
 						<div>
 							<label for="codice_fiscale">Codice Fiscale</label>
