@@ -136,15 +136,20 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 table {
-    width:100%;
+    width:99%;
+    background-color:#fff;
 }
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    background-color:#fff;
+    color:#000;
 }
 th, td {
     padding: 5px;
     text-align: center;
+    background-color:#fff;
+    color:#000;
 	/*background-color:;*/
 	}
 th {background-color:#333399;
