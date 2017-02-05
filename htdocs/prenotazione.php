@@ -32,6 +32,7 @@
 	}
 	
 	$errori = "";
+	$res=0;
 	
 	$data="";
 	$selezione_tipo_biglietto = array($numero_elementi_prenotazione);
@@ -93,7 +94,12 @@
 					$res=prenota($data, $quantita_biglietti[$i], $selezione_tipo_biglietto[$i], $_SESSION['userID']);
 				}
 				if ($res!=2){
-					$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
+					if($res==0){
+						$errori = $errori ."Attenzione: non hai selezionato alcun biglietto.";
+						$step=1;
+					}else{
+						$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
+					}
 					$i=count($quantita_biglietti)+1;
 				}
 			}
