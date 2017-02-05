@@ -183,17 +183,18 @@
 				$trovato_errori = 1;
 			}*/
 			$risultato_regex="";
-			preg_match("/[a-zA-Z\.0-9]+@[a-zA-Z\.0-9]+\.[a-zA-Z\.0-9]+/", $email, $risultato_regex);
-			if (!isset($risultato_regex[0])) {
-				$errori['email']=1;
-				$trovato_errori = 1;
-			}else{
-				if($risultato_regex[0]!=$email){
+			if($email!="admin"){
+				preg_match("/[a-zA-Z\.0-9]+@[a-zA-Z\.0-9]+\.[a-zA-Z\.0-9]+/", $email, $risultato_regex);
+				if (!isset($risultato_regex[0])) {
 					$errori['email']=1;
 					$trovato_errori = 1;
-				}	
+				}else{
+					if($risultato_regex[0]!=$email){
+						$errori['email']=1;
+						$trovato_errori = 1;
+					}	
+				}
 			}
-
 			
 			if ($password != $confermaPassword){
 				$errori['password']=1;
@@ -297,8 +298,8 @@
 							<input type="text" name="dataDiNascita" id="dataDiNascita" value="<?php print $dataDiNascita ?>" /><?php if ($errori['dataDiNascita']>0){print $testo_errore;}?>
 						</div>
 						<div>
-							<label for="email">Email</label>
-							<input type="text" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
+							<label for="email">Email (non modificabile dopo la registrazione)</label>
+							<input type="text" readonly="readonly" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
 						</div>
 						<div>
 							<label for="codice_fiscale">Codice Fiscale</label>

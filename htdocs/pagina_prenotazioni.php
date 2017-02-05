@@ -49,7 +49,11 @@
 		}
 		
 		$testo="";
-		$prenotazioni=leggi_prenotazioni($_SESSION['userID']);
+		$id_utente=$_SESSION['userID'];
+		if($_SESSION['admin']>0){
+			$id_utente=0;
+		}
+		$prenotazioni=leggi_prenotazioni($id_utente);
 		if($id_eliminazione>0){
 			//$res
 			if($res==2){
