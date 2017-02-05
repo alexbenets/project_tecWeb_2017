@@ -46,10 +46,11 @@
 			}else{
 				$selezione_tipo_biglietto[$i]=-1;
 			}
+			$quantita_biglietti[$i] = 0;
 			if (isset($_POST['numero_biglietti'.$i])){
-				$quantita_biglietti[$i] = $_POST['numero_biglietti'.$i];
-			}else{
-				$quantita_biglietti[$i] = -1;
+				if(is_numeric($_POST['numero_biglietti'.$i])){
+					$quantita_biglietti[$i] = $_POST['numero_biglietti'.$i];
+				}
 			}
 		}
 		
@@ -83,29 +84,37 @@
 	}
 	/* ho superato indenne la fase di verifica, procedo con la prenotazione.*/
 	if ($step==2){
+		$prenotato=0;
+		$fallimento_query=0;
 		/* semplice verifica contro i ricaricamenti della pagina. */
 		if($_POST['rnd_str']==$_SESSION['rnd_prenotazione']){
 			/* consumo il token */
 			$_SESSION['rnd_prenotazione']="0";
 			$i=0;
 			$res=0;
-			for ($i=0; $i<count($quantita_biglietti); $i++){
+			for ($i=0; $i<$numero_elementi_prenotazione; $i++){
 				if(($quantita_biglietti[$i]>0) & ($selezione_tipo_biglietto[$i]>0)){
 					$res=prenota($data, $quantita_biglietti[$i], $selezione_tipo_biglietto[$i], $_SESSION['userID']);
 				}
-				if ($res!=2){
-					if($res==0){
-						$errori = $errori ."Attenzione: non hai selezionato alcun biglietto.";
-						$step=1;
-					}else{
-						$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
-					}
-					$i=count($quantita_biglietti)+1;
+				if ($res==2){
+					$prenotato=1;
+				}
+				if($res==-1){
+					$fallimento_query=1;
 				}
 			}
 		}else{
 			$res=0;
 			$errori=$errori."Attenzione: hai gi&agrave; effettuato questa prenotazione.";
+		}
+		if($prenotato==1){
+			$errori="";
+		}else {
+			$step=1;
+			$errori = $errori ."Attenzione: non hai selezionato alcun biglietto.";
+			if($fallimento_query>0){
+				$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
+			}
 		}
 	}
 	
@@ -199,14 +208,17 @@
 												<option value ="-1" selected="selected" disabled="disabled">Seleziona</option>
 												<?php
 												print '<option value="-1" disabled="disabled">'.$titolo.'</option>';
+												
+											$num_elementi ++;
 											}
 											$titolo = $riga['note_varie'];
 											print '<option value="'.$riga['ID_Tipologia_Prenotazione'].'" ';
 											
-											/*if ($riga['ID_Tipologia_Prenotazione']==$selezione_tipo_biglietto){
-												print ' selected="selected"';
-											}*/
-											
+											if (isset($selezione_tipo_biglietto[$num_elementi-1])){
+												if ($riga['ID_Tipologia_Prenotazione']==$selezione_tipo_biglietto[$num_elementi-1]){
+													print ' selected="selected"';
+												}
+											}
 											print '>'.$riga['nome'].' ';
 											$prezzo=$riga['prezzo'];
 											if($prezzo>0){
@@ -215,7 +227,6 @@
 												$prezzo = "GRATIS";
 											}
 											print $prezzo.'</option>';
-											$num_elementi ++;
 										}
 								if($num_elementi>0){
 								

@@ -183,7 +183,7 @@
 				$trovato_errori = 1;
 			}*/
 			$risultato_regex="";
-			if($email!="admin"){
+			if($_SESSION['login']==""){
 				preg_match("/[a-zA-Z\.0-9]+@[a-zA-Z\.0-9]+\.[a-zA-Z\.0-9]+/", $email, $risultato_regex);
 				if (!isset($risultato_regex[0])) {
 					$errori['email']=1;

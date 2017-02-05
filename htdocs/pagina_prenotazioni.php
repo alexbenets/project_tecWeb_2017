@@ -102,6 +102,7 @@
 		}
 		
 		?>
+		<h3><a href="login.php?area_utente=1" class="link_form">Torna all'area utente</a></h3>
 	</div>
 	<!-- chiudo content-->
 			

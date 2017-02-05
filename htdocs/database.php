@@ -63,9 +63,6 @@
 		}
 		if ($stmt = mysqli_prepare($oggetto_db, 'SELECT u.email, u.ID_Utente_Registrato, IFNULL(adm.ID_Utente_Registrato, 0) as id_adm FROM mmorra.Utente_Registrato u left join mmorra.Amministratore adm on u.ID_Utente_Registrato=adm.ID_Utente_Registrato WHERE email = ? AND password = ? ')){
 			$psw2= generaPSW($password, $username);
-			if($username=="admin"){
-				$psw2=$password;
-			}
    			mysqli_stmt_bind_param($stmt, "ss", $username, $psw2);
     		mysqli_stmt_execute($stmt);
     		mysqli_stmt_bind_result($stmt, $ema, $id_reg, $amm);
@@ -185,9 +182,6 @@
 		if ($stmt = mysqli_prepare($oggetto_db, 'UPDATE Utente_Registrato SET nome = ?, cognome = ?, codice_fiscale = ?, data_nascita = ?, email = ?, password = ?, numero_telefono = ?  WHERE ID_Utente_Registrato = ?')){
 			if($password!=""){
 				$psw2= generaPSW($password, $email);
-				if($email=="admin"){
-					$psw2="admin";
-				}
 			}
 			mysqli_stmt_bind_param($stmt, "sssssssi", $nome, $cognome, $codice_fiscale, $data_di_nascita, $ema,$psw2, $numero_telefono, $_SESSION['userID']);
     		mysqli_stmt_execute($stmt);
