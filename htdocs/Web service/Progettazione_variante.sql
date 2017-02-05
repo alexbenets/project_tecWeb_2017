@@ -1,5 +1,14 @@
 SET FOREIGN_KEY_CHECKS=0;
 
+-- elimino vecchie tabelle --
+
+DROP TABLE IF EXISTS Utilizzo_Biglietto;
+DROP TABLE IF EXISTS Protagonista;
+DROP TABLE IF EXISTS News;
+DROP TABLE IF EXISTS FAQ;
+DROP TABLE IF EXISTS Entita;
+DROP TABLE IF EXISTS Sezione;
+
 DROP TABLE IF EXISTS Luogo;
 CREATE TABLE Luogo (
 	ID_Luogo INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -13,17 +22,6 @@ CREATE TABLE Sede (
 	nome VARCHAR(50),
 	ID_Luogo INT NOT NULL,
 	FOREIGN KEY (ID_Luogo) REFERENCES Luogo (ID_Luogo)
-);
-
-DROP TABLE IF EXISTS Sezione;
-CREATE TABLE Sezione (
-	ID_Sezione INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	nome VARCHAR(50),
-	titolo VARCHAR(50),
-	testo_presentazione VARCHAR(500),
-	prezzo INT,
-	ID_Sede INT NOT NULL,
-	FOREIGN KEY (ID_Sede) REFERENCES Sede (ID_Sede)
 );
 
 DROP TABLE IF EXISTS Tipologia_Prenotazione;
@@ -53,37 +51,6 @@ CREATE TABLE Amministratore (
 	FOREIGN KEY (ID_Utente_Registrato) REFERENCES Utente_Registrato (ID_Utente_Registrato)
 );
 
-DROP TABLE IF EXISTS Entita;
-CREATE TABLE Entita (
-	ID_Entita INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	nome VARCHAR(50),
-	nome_icona VARCHAR(10),
-	nome_immagine VARCHAR(10),
-	quantita INT,
-	ID_Sede INT NOT NULL,
-	FOREIGN KEY (ID_Sede) REFERENCES Sede (ID_Sede)
-);
-
-DROP TABLE IF EXISTS FAQ;
-CREATE TABLE FAQ (
-	ID_FAQ INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	data DATE,
-	domanda VARCHAR(500),
-	risposta VARCHAR(500),
-	ID_Utente_Registrato INT NOT NULL,
-	FOREIGN KEY (ID_Utente_Registrato) REFERENCES Amministratore (ID_Utente_Registrato)
-);
-
-DROP TABLE IF EXISTS News;
-CREATE TABLE News (
-	ID_News INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	data DATE,
-	titolo VARCHAR(50),
-	testo VARCHAR(500),
-	ID_Utente_Registrato INT NOT NULL,
-	FOREIGN KEY (ID_Utente_Registrato) REFERENCES Amministratore (ID_Utente_Registrato)
-);
-
 DROP TABLE IF EXISTS Prenotazione;
 CREATE TABLE Prenotazione (
 	ID_Prenotazione INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -97,22 +64,37 @@ CREATE TABLE Prenotazione (
 	FOREIGN KEY (ID_Utente_Registrato) REFERENCES Utente_Registrato (ID_Utente_Registrato)
 );
 
-DROP TABLE IF EXISTS Protagonista;
-CREATE TABLE Protagonista (
-	ID_Sezione INT NOT NULL,
-	ID_Entita INT NOT NULL,
- 	PRIMARY KEY (ID_Sezione,ID_Entita),
- 	FOREIGN KEY (ID_Sezione) REFERENCES Sezione (ID_Sezione),
- 	FOREIGN KEY (ID_Entita) REFERENCES Entita (ID_Entita)
-);
+-- Popolamento località --
+INSERT INTO Luogo(ID_luogo, Citta, Paese) VALUES(1, 'Padova', 'Italia');
+Insert INTO Sede(ID_Sede, nome, ID_Luogo) VALUES(1, 'Palageox', 1);
 
-DROP TABLE IF EXISTS Utilizzo_Biglietto;
-CREATE TABLE Utilizzo_Biglietto (
-	ID_Utilizzo_Biglietto INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	data DATE,
-	numero_posti INT,
-	ID_Prenotazione INT NOT NULL,
-	FOREIGN KEY (ID_Prenotazione) REFERENCES Prenotazione (ID_Prenotazione)
-);
+-- popolamento tipi biglietti --
+
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('INTERO', null, 'TARIFFE INDIVIDUALI', 20);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('RIDOTTO', '(da 100cm a 140 di altezza)', 'TARIFFE INDIVIDUALI', 16);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('SENIOR OVER 65', null, 'TARIFFE INDIVIDUALI', 16);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('INVALIDO', null, 'TARIFFE INDIVIDUALI', 16);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('ACCOMPAGNATORE DISABILE', null, 'TARIFFE INDIVIDUALI', 16);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('BIMBI', 'fino ad 1 metro', 'TARIFFE INDIVIDUALI', 0);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('DISABILE', 'non autosufficiente', 'TARIFFE INDIVIDUALI', 0);
+
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('GRUPPI MISTI', null, 'TARIFFE GRUPPI', 15);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('GRUPPI OVER 65', null, 'TARIFFE GRUPPI', 12);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('GRUPPI SPORTIVI RAGAZZI', '(fino a 16 anni)', 'TARIFFE GRUPPI', 10);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('CENTRI ESTIVI', null, 'TARIFFE GRUPPI', 10);
 
 
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('STUDENTI', null, 'SCOLARESCHE', 10);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('ACCOMPAGNATORI NON DOCENTI', null, 'SCOLARESCHE', 15);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('DOCENTI', null, 'SCOLARESCHE', 0);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('BAMBINI SOTTO IL METRO', null, 'SCOLARESCHE', 0);
+INSERT INTO Tipologia_Prenotazione(nome, descrizione, note_varie, prezzo) VALUES('DIVERSAMENTE ABILI', null, 'SCOLARESCHE', 0);
+
+-- UTENTI --
+INSERT INTO Utente_Registrato (ID_Utente_Registrato, nome, cognome, codice_fiscale, numero_telefono, data_nascita, email, password) VALUES (1, 'Amministratore', 'Di Sistema', 'AMM', '000000', '1987-01-12', 'admin', '99ccf152e63f5c2aca927995fe46d2d318db51c68d07f8df92');
+INSERT INTO Utente_Registrato (ID_Utente_Registrato, nome, cognome, codice_fiscale, numero_telefono, data_nascita, email, password) VALUES (2, 'Utente', 'Di Sistema', 'UTE', '000000', '1987-01-12', 'user', '2d9add75671947d61c30ea63c4433848d49829ef7354963d02');
+
+-- SELEZIONO AMMINISTRATORI --
+INSERT INTO Amministratore(ID_Utente_Registrato) VALUES(1);
+
+SET FOREIGN_KEY_CHECKS=1;
