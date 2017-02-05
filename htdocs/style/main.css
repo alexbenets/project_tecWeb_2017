@@ -122,7 +122,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #content{
-    background-color:#AAAAAA;
+    background-color:#DDD;
     margin:0px;
     padding:0.1em 1.5em 0.5em;
     font-size: 1.2em;
@@ -148,18 +148,17 @@ table, th, td {
 th, td {
     padding: 5px;
     text-align: center;
-    background-color:#fff;
-    color:#000;
-	/*background-color:;*/
 	}
-th {background-color:#333399;
-	color:#ffffff;
+th {
+	/*background-color:#222288;
+	color:#ffffff;*/
 }
 td{
-	background-color:#666699;
+	/*background-color:#666699;*/
 }
 .normal{
-	background-color:#666699;
+	/*background-color:#666699;*/
+	background-color:#fff;
 }
 .hollow{
 	background-color:#333399;
@@ -172,7 +171,7 @@ td{
 }
 
 body{
-	background-color:#AAAAAA;
+	background-color:#DDD;
 }
 /*FINE MAIN*/
 
