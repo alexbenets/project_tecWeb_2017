@@ -184,9 +184,14 @@
 			}*/
 			$risultato_regex="";
 			preg_match("/[a-zA-Z\.0-9]+@[a-zA-Z\.0-9]+\.[a-zA-Z\.0-9]+/", $email, $risultato_regex);
-			if ($risultato_regex[0]!=$email) {
+			if (!isset($risultato_regex[0])) {
 				$errori['email']=1;
 				$trovato_errori = 1;
+			}else{
+				if($risultato_regex[0]!=$email){
+					$errori['email']=1;
+					$trovato_errori = 1;
+				}	
 			}
 
 			
@@ -223,7 +228,7 @@
 							$messaggio="C'&egrave; stato un problema nella modifica dei dati personali!";
 						}
 					}else{
-						$messaggio="Modifica i tuoi dati";
+						$messaggio.='<p><a href="pagina_prenotazioni.php" class="link_form">Gestisci le prenotazioni</a></p>';
 					
 					}
 				}
@@ -250,7 +255,7 @@
 						<label for="entraL">Entra</label>
 						<input type="submit" name="entra" id="entraL" value="Entra" />
 						<input type="hidden" name="loginF" id="loginF" value="1"/>
-						<a href="login.php?iscriviti=1">Iscriviti</a>
+						<p><a href="login.php?iscriviti=1">Non sei registrato? Iscriviti!</a></p>
 					</fieldset>
 				</form>
 				<?php
@@ -274,7 +279,7 @@
 						}else{
 						?>
 						<h2>Benvenuto nella tua area personale; qui puoi aggiornare i tuoi dati.</h2>
-						<a href="login.php?logout=1">Esci</a>
+						<a href="login.php?logout=1">Esegui il logout</a>
 						<?php
 						}
 						
@@ -314,7 +319,7 @@
 						<?php
 						$txt_pulsante = "Iscriviti";
 						if($modifica_utente==1){
-							$txt_pulsante="Aggiorna";
+							$txt_pulsante="Aggiorna i tuoi dati";
 							print '<input type="hidden" id="area_utente" name="area_utente" value="1"/>';
 						}
 						print "<label for=\"entraR\">$txt_pulsante</label>";
@@ -326,7 +331,7 @@
 				<?php
 				}
 				if($trovato_errori>0){
-					print "<h2>Errore</h2>";
+					print "<h2>Errore, compila i campi indicati correttamente.</h2>";
 				}
 				if ($messaggio!=""){
 					print "<h2>$messaggio</h2>";

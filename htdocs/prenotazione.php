@@ -9,7 +9,7 @@
 	}
 	/* controllo se ho effettuato l'accesso */
 	$biglietti = leggi_tipologie_di_prenotazione();
-	$link_prenotazione='<a href="login.php">Accedi per prenotare</a>';
+	$link_prenotazione='<a href="login.php" class="link_form">Accedi per prenotare</a>';
 	$step=0;
 	
 	$numero_elementi_prenotazione = 0;
@@ -268,8 +268,8 @@
 					}else{
 						print "<h3>$errori</h3>";
 						?>
-						<p><a href="index.html">Torna alla homepage</a></p>
-						<p><a href="login.php?area_utente=1"><?php 
+						<p><a href="index.html" class="link_form">Torna alla homepage</a></p>
+						<p><a href="login.php?area_utente=1" class="link_form"><?php 
 										if($_SESSION['login']!="")
 										{print "Gestisci il tuo profilo";}
 										else

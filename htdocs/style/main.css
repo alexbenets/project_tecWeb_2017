@@ -213,10 +213,48 @@ body{
 	font-size: 0.8em;
 	color: #000000;
 }
-form div {
+
+/*  SEZIONE FORM */
+
+/* gli input all'interno di un div: name e password */
+form fieldset div {
+	display:inline-block;
+	width:100%;
+	margin-bottom:10px;
+}
+
+form fieldset div label {
+	display:inline-block;
+	width:15%;
+	margin-right:10px;
+}
+form fieldset div input{
+	border:1px solid #000;
+	display:inline-block;
+}
+form fieldset div .errore {
+	font-size:15px;
+	color:#ff0000;
+	display:inline-block;
+	margin-left:10px;
+}
+
+/* gli input all'esterno del div: submit*/
+form fieldset input[type='submit']{
+	border:1px solid #000;
+	background-color:#FFF;
+}
+form fieldset label {
+	display:inline-block;
+	width:15%;
+	margin-right:10px;
+}
+
+
+form fieldset a, .link_form {
+	color:#000;
+	font-weight:bold;
 	display:inline-block;
 	margin-top:10px;
-}
-form div label {
-	color:#33ffcc;
+	margin-bottom:10px;
 }

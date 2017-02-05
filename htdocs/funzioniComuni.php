@@ -10,6 +10,7 @@
 	$menu['Storia']="storia.html";
 	$menu['Educazione all\'ambiente']="educazione.html";
 	$menu['Biglietti']="prenotazione.php";
+	$menu['Orario']="orario.html";
 	$menu['Come arrivare']="comeArrivare.html";
 	$menu['Contatti']="contatti.html";
 	$menu['Pagina utente']="login.php?area_utente=1";
@@ -60,10 +61,10 @@
 	
 	<head>
 		<link rel="stylesheet" href="style/main.css" type="text/css" media="screen" charset="utf-8"/>
-		<title>Home - Acquario di PLACEHOLDER</title>
+		<title><?php print $nome_attivo;?> - Acquario di Thalassa</title>
 
-		<meta name="title" content="Acquario di PLACEHOLDER" />
-		<meta name="description" content="Home page del sito di Acquario di PLACEHOLDER" />
+		<meta name="title" content="Acquario di Thalassa" />
+		<meta name="description" content="Home page del sito di Acquario di Thalassa" />
 		<meta name="keywords" content="Acquario, pesci, acqua, barriera corallina, oceano" />
 		<meta name="language" content="italian it" />
 		<meta name="author" content="Gruppo MarAlFraMar" />
@@ -73,7 +74,7 @@
 	<body>
 		<div id="header">
 			<div id="banner">
-				<h1>Acquario di PLACEHOLDER</h1>
+				<h1>Acquario di Thalassa</h1>
 				<h2>La magia dell'oceano davanti a te!</h2>
 			</div><!-- chiudo banner-->			
 		</div><!-- chiudo header-->	
