@@ -2,7 +2,7 @@
 	session_start();
 	require "database.php";
 	require "funzioniComuni.php";
-	
+		
 	$_SESSION['page']="prenotazione.php";
 	if(!isset($_SESSION['login'])){
 		$_SESSION['login']="";
@@ -39,17 +39,17 @@
 	/* se ho inviato il modulo */
 	if(isset($_POST['invia'])){
 		$i=0;
-		for ($i=0; $i<$numero_elementi_prenotazione-1; $i++){
-			if (isset($_POST['tipo_biglietto'.$i+1])){
+		for ($i=0; $i<$numero_elementi_prenotazione; $i++){
+			if (isset($_POST['tipo_biglietto'.$i])){
 				$selezione_tipo_biglietto[$i] = $_POST['tipo_biglietto'.$i];
+			}else{
+				$selezione_tipo_biglietto[$i]=-1;
 			}
-			if (isset($_POST['numero_biglietti'.$i+1])){
+			if (isset($_POST['numero_biglietti'.$i])){
 				$quantita_biglietti[$i] = $_POST['numero_biglietti'.$i];
 			}else{
 				$quantita_biglietti[$i] = -1;
 			}
-			print $selezione_tipo_biglietto[$i];
-			print $quantita_biglietti[$i];
 		}
 		
 		if (isset($_POST['data'])){
@@ -87,11 +87,14 @@
 			/* consumo il token */
 			$_SESSION['rnd_prenotazione']="0";
 			$i=0;
-			for ($i=0; $i<length($quantita_biglietti); $i++){
-				$res=prenota($data, $quantita_biglietti[$i], $selezione_tipo_biglietto[$i], $_SESSION['userID']);
+			$res=0;
+			for ($i=0; $i<count($quantita_biglietti); $i++){
+				if(($quantita_biglietti[$i]>0) & ($selezione_tipo_biglietto[$i]>0)){
+					$res=prenota($data, $quantita_biglietti[$i], $selezione_tipo_biglietto[$i], $_SESSION['userID']);
+				}
 				if ($res!=2){
 					$errori = $errori ."Attenzione: qualcosa &egrave; andato storto durante la prenotazione, la prenotazione &egrave; stata annullata.";
-					$i=length($quantita_biglietti)+1;
+					$i=count($quantita_biglietti)+1;
 				}
 			}
 		}else{
@@ -163,8 +166,8 @@
 										
 										$titolo="";
 										$prezzo=0;
+										$num_elementi=0;
 										foreach ($biglietti as &$riga ){
-											$num_elementi ++;
 											if(!isset($quantita_biglietti[$num_elementi-1])){
 												$quantita_biglietti[$num_elementi-1]=1;
 											}
@@ -175,13 +178,18 @@
 												?>
 								</select>
 								<label for="numero_biglietti<?php print $num_elementi-1;?>">Numero di biglietti da acquistare</label>
-								<input type="text" name="numero_biglietti<?php print $num_elementi-1;?>" id="numero_biglietti<?php print $num_elementi-1;?>" value="<?php print $quantita_biglietti[$num_elementi-1]; ?>" />
+								<input type="text" name="numero_biglietti<?php print $num_elementi-1;?>" id="numero_biglietti<?php print $num_elementi-1;?>" value="<?php 
+																																										if(isset($_POST['step'])){
+																																											print $quantita_biglietti[$num_elementi-1];
+																																										}else{
+																																											print 1;
+																																										} ?>" />
 												<?php
 												}
 												?>
 												<h3><?php print $riga['note_varie']; ?></h3>
-												<label for="tipo_biglietto<?php print $num_elementi-1;?>">Seleziona il biglietto che desideri prenotare</label>
-												<select name="tipo_biglietto<?php print $num_elementi-1;?>" id="tipo_biglietto<?php print $num_elementi-1;?>">
+												<label for="tipo_biglietto<?php print $num_elementi;?>">Seleziona il biglietto che desideri prenotare</label>
+												<select name="tipo_biglietto<?php print $num_elementi;?>" id="tipo_biglietto<?php print $num_elementi;?>">
 												<option value ="-1" selected="selected" disabled="disabled">Seleziona</option>
 												<?php
 												print '<option value="-1" disabled="disabled">'.$titolo.'</option>';
@@ -201,14 +209,22 @@
 												$prezzo = "GRATIS";
 											}
 											print $prezzo.'</option>';
+											$num_elementi ++;
 										}
 								if($num_elementi>0){
+								
+											//$num_elementi ++;
 								?>
 								
 								</select>
 								<input type="hidden" name="numero_elementi" id="numero_elementi" value="<?php print $num_elementi?>"/>
 								<label for="numero_biglietti<?php print $num_elementi-1;?>">Numero di biglietti da acquistare</label>
-								<input type="text" name="numero_biglietti<?php print $num_elementi-1;?>" id="numero_biglietti<?php print $num_elementi-1;?>" value="<?php print $quantita_biglietti[$num_elementi-1]; ?>" />
+								<input type="text" name="numero_biglietti<?php print $num_elementi-1;?>" id="numero_biglietti<?php print $num_elementi-1;?>" value="<?php 
+																																										if(isset($_POST['step'])){
+																																											print $quantita_biglietti[$num_elementi-1];
+																																										}else{
+																																											print 1;
+																																										} ?>" />
 								<?php
 								}
 								?>

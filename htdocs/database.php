@@ -201,17 +201,21 @@
     		printf("Connect failed: %s\n", mysqli_connect_error());
 			return -1;
 		}
-		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Prenotazione (data, numero_posti_disponibili, ID_Sede, ID_Tipologia_prenotazione, ID_Utente_registrato) values (?, ?, ?, ?, ?)')){
+		if ($stmt = mysqli_prepare($oggetto_db, 'INSERT INTO Prenotazione (data, numero_posti, ID_Sede, ID_Tipologia_prenotazione, ID_Utente_registrato) values (?, ?, ?, ?, ?)')){
 			mysqli_stmt_bind_param($stmt, "siiii",  $data_convertita, $posti, $trovato, $tipo_prenotazione, $id_utente);
 			mysqli_stmt_execute($stmt);
   			
+  			/* se ho eseguito l'insert */
+    		if(mysqli_stmt_affected_rows ($stmt)==1){
+    			$trovato = 2;
+    		}
     		mysqli_stmt_close($stmt);
-    		$trovato = 2;
 		}
 		mysqli_close($oggetto_db);
 		
 		return $trovato;
 	}
+	
 	function leggi_tipologie_di_prenotazione(){
 		global $host_db;
 		global $nome_utente_db;

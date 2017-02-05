@@ -239,10 +239,14 @@
 				?>
 				<form action="login.php" method="post">
 					<fieldset>
-						<label for="username">Username</label>
-						<input type="text" name="username" id="username" value="<?php print $nome;?>" /><?php if ($errori['nome']>0){print $testo_errore;}?>
-						<label for="passwordL">Password</label>
-						<input type="password" name="password" id="passwordL" value="<?php print $password;?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
+						<div>
+							<label for="username">Username</label>
+							<input type="text" name="username" id="username" value="<?php print $nome;?>" /><?php if ($errori['nome']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="passwordL">Password</label>
+							<input type="password" name="password" id="passwordL" value="<?php print $password;?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
+						</div>
 						<label for="entraL">Entra</label>
 						<input type="submit" name="entra" id="entraL" value="Entra" />
 						<input type="hidden" name="loginF" id="loginF" value="1"/>
@@ -275,22 +279,38 @@
 						}
 						
 						?>
-						<label for="nome">Nome</label>
-						<input type="text" name="nome" id="nome" value="<?php print $nome ?>" /><?php if ($errori['nome']>0){print $testo_errore;}?>
-						<label for="cognome">Cognome</label>
-						<input type="text" name="cognome" id="cognome" value="<?php print $cognome ?>" /><?php if ($errori['cognome']>0){print $testo_errore;}?>
-						<label for="dataDiNascita">Data di nascita</label>
-						<input type="text" name="dataDiNascita" id="dataDiNascita" value="<?php print $dataDiNascita ?>" /><?php if ($errori['dataDiNascita']>0){print $testo_errore;}?>
-						<label for="email">Email</label>
-						<input type="text" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
-						<label for="codice_fiscale">Codice Fiscale</label>
-						<input type="text" name="codice_fiscale" id="codice_fiscale" value="<?php print $codice_fiscale; ?>" /><?php if ($errori['codice_fiscale']>0){print $testo_errore;}?>
-						<label for="numero_telefono">Numero di telefono</label>
-						<input type="text" name="numero_telefono" id="numero_telefono" value="<?php print $numero_telefono; ?>" /><?php if($errori['numero_telefono']>0){print $testo_errore;}?>
-						<label for="passwordR">Password</label>
-						<input type="password" name="password" id="passwordR" value="<?php print $password ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
-						<label for="confermaPassword">Conferma password</label>
-						<input type="password" name="confermaPassword" id="confermaPassword" value="<?php print $confermaPassword ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
+						<div>
+							<label for="nome">Nome</label>
+							<input type="text" name="nome" id="nome" value="<?php print $nome ?>" /><?php if ($errori['nome']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="cognome">Cognome</label>
+							<input type="text" name="cognome" id="cognome" value="<?php print $cognome ?>" /><?php if ($errori['cognome']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="dataDiNascita">Data di nascita</label>
+							<input type="text" name="dataDiNascita" id="dataDiNascita" value="<?php print $dataDiNascita ?>" /><?php if ($errori['dataDiNascita']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="email">Email</label>
+							<input type="text" name="email" id="email" value="<?php print $email ?>" /><?php if ($errori['email']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="codice_fiscale">Codice Fiscale</label>
+							<input type="text" name="codice_fiscale" id="codice_fiscale" value="<?php print $codice_fiscale; ?>" /><?php if ($errori['codice_fiscale']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="numero_telefono">Numero di telefono</label>
+							<input type="text" name="numero_telefono" id="numero_telefono" value="<?php print $numero_telefono; ?>" /><?php if($errori['numero_telefono']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="passwordR">Password</label>
+							<input type="password" name="password" id="passwordR" value="<?php print $password ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
+						</div>
+						<div>
+							<label for="confermaPassword">Conferma password</label>
+							<input type="password" name="confermaPassword" id="confermaPassword" value="<?php print $confermaPassword ?>" /><?php if ($errori['password']>0){print $testo_errore;}?>
+						</div>
 						<?php
 						$txt_pulsante = "Iscriviti";
 						if($modifica_utente==1){

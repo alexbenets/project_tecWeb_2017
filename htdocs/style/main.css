@@ -145,7 +145,7 @@ table, th, td {
 th, td {
     padding: 5px;
     text-align: center;
-	background-color:;
+	/*background-color:;*/
 	}
 th {background-color:#333399;
 	color:#ffffff;
@@ -212,4 +212,11 @@ body{
 	text-decoration: none;
 	font-size: 0.8em;
 	color: #000000;
+}
+form div {
+	display:inline-block;
+	margin-top:10px;
+}
+form div label {
+	color:#33ffcc;
 }
