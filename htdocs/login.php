@@ -229,7 +229,7 @@
 							$messaggio="C'&egrave; stato un problema nella modifica dei dati personali!";
 						}
 					}else{
-						$messaggio.='<p><a href="pagina_prenotazioni.php" class="link_form">Gestisci le prenotazioni</a></p>';
+						$messaggio.='<a href="pagina_prenotazioni.php" class="link_form">Gestisci le prenotazioni</a>';
 					
 					}
 				}
